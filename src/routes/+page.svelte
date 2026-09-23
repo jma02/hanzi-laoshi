@@ -5,7 +5,6 @@
   import '../styles/companion.css';
   import '../styles/collection.css';
   import '../styles/responsive.css';
-  import Icon from '$lib/components/Icon.svelte';
   import Practice from '$lib/components/Practice.svelte';
   import Collection from '$lib/components/Collection.svelte';
   import Companion from '$lib/components/Companion.svelte';
@@ -51,30 +50,35 @@
   }
 </script>
 
-<svelte:head><title>Hanzi Laoshi · A little Chinese, every day</title><meta name="description" content="Learn to read Chinese one character at a time. Annotate pinyin, discover everyday sentences, and build confidence with adaptive practice."/><meta name="theme-color" content="#19483e"/></svelte:head>
+<svelte:head><title>汉字老师 - 在线拼音练习 | Hanzi Laoshi</title><meta name="description" content="Chinese reading and pinyin practice. 440 sentences, per-character annotations, and adaptive review."/><meta name="theme-color" content="#1756a4"/></svelte:head>
 
-<div class="app-shell">
-  <aside class="sidebar">
-    <a class="brand" href="/" aria-label="Hanzi Laoshi home"><span class="brand-mark" lang="zh">汉字<br/>老师</span><span>hanzi<br/>laoshi<span class="brand-dot">.</span></span></a>
-    <span class="sidebar-label">A LITTLE CHINESE, EVERY DAY</span>
-    <nav aria-label="Main navigation">{#each [{ id: 'practice', icon: 'book', title: 'Daily practice', chinese: '每日练习' }, { id: 'characters', icon: 'grid', title: 'My characters', chinese: '我的字库' }, { id: 'sentences', icon: 'search', title: 'Sentence garden', chinese: '句子小园' }] as item}<button class:current={view === item.id} aria-current={view === item.id ? 'page' : undefined} onclick={() => { view = item.id; }}><Icon name={item.icon}/><span>{item.title}<small lang="zh">{item.chinese}</small></span>{#if view === item.id}<span class="nav-indicator"></span>{/if}</button>{/each}</nav>
-    <section class="level-card"><div class="level-badge" lang="zh">学</div><span>LEVEL {level}</span><h3>{level < 3 ? 'Curious seedling' : level < 6 ? 'Growing reader' : 'Hanzi explorer'}</h3><div class="level-track"><span style={`width:${progress.xp % 150 / 150 * 100}%`}></span></div><p>{progress.xp % 150} / 150 XP to level {level + 1}</p></section>
-    <div class="sidebar-bottom"><button class="settings-button" aria-expanded={settingsOpen} onclick={() => { settingsOpen = !settingsOpen; }}><Icon name="settings"/>Practice settings</button><div class="local-save"><span class="save-dot"></span>{storageMessage ? 'Progress is not saved' : 'Your progress stays with you'}<span>Saved in this browser</span></div></div>
-  </aside>
+<div class="portal">
+  <div class="utility-bar"><span>汉字老师 · 在线汉语学习</span><span>{storageMessage ? '保存失败 · Not saved' : '本机保存 · Progress saved locally'}</span></div>
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="Hanzi Laoshi home"><strong lang="zh">汉字老师</strong><span>HANZI LAOSHI</span></a>
+    <div class="site-description"><b lang="zh">汉字认读 · 拼音标注 · 错字复习</b><p>Chinese reading &amp; pinyin practice</p><span>句库：<b>{sentences.length}</b> 句　汉字：<b>{totalCharacters}</b> 个</span></div>
+  </header>
+  <nav class="portal-nav" aria-label="Main navigation">
+    {#each [{ id: 'practice', title: 'Practice', chinese: '拼音练习' }, { id: 'characters', title: 'Characters', chinese: '我的字库' }, { id: 'sentences', title: 'Sentences', chinese: '例句查询' }] as item}
+      <button class:current={view === item.id} aria-current={view === item.id ? 'page' : undefined} onclick={() => { view = item.id; }}><b lang="zh">{item.chinese}</b> <span>{item.title}</span></button>
+    {/each}
+    <button class:current={settingsOpen} aria-expanded={settingsOpen} onclick={() => { settingsOpen = !settingsOpen; }}><b lang="zh">练习设置</b> <span>Settings</span></button>
+  </nav>
+  <div class="announcement"><strong lang="zh">【使用说明】</strong>在汉字下填写拼音。 <span>Type pinyin below each character. <b>Tab</b> → next · <b>?</b> → reveal.</span></div>
   <main>
-    <header class="topbar"><div class="breadcrumb"><span class="room-label" lang="zh">书房</span> Your reading room <span>/</span> <strong>{view === 'practice' ? 'Daily practice' : view === 'characters' ? 'My characters' : 'Sentence garden'}</strong></div><div class="top-stats"><span><Icon name="flame" size={19}/><b>{streak}</b> <span>day streak</span></span><span><Icon name="spark" size={18}/><b>{progress.xp}</b> XP</span><div class="avatar" lang="zh" aria-label="Your profile">你</div></div></header>
-    <div class="workspace">
-      <div class="page-heading"><div><div class="greeting"><span lang="zh">慢慢来</span> GOOD THINGS TAKE PRACTICE</div><h1><span class="heading-chinese" lang="zh">{view === 'practice' ? '小小书房' : view === 'characters' ? '我的字库' : '句子小园'}</span>{view === 'practice' ? 'A little Chinese. A little closer.' : view === 'characters' ? 'Old friends. New characters.' : 'Everyday words, a wider world.'}</h1><p>{view === 'practice' ? 'Pull up a chair. Pour some tea. Let’s read something together.' : view === 'characters' ? 'Your own little collection of characters, one discovery at a time.' : `${sentences.length} sentences. ${totalCharacters} characters. Follow your curiosity.`}</p></div><div class="script-toggle" aria-label="Character script"><button class:selected={!settings.traditional} aria-pressed={!settings.traditional} onclick={() => { settings.traditional = false; }}>简 <span>Simplified</span></button><button class:selected={settings.traditional} aria-pressed={settings.traditional} onclick={() => { settings.traditional = true; }}>繁 <span>Traditional</span></button></div></div>
-      {#if storageMessage}<p class="notice" role="status">{storageMessage}</p>{/if}
-      {#if settingsOpen}<section class="settings-panel"><div class="section-label"><h3>Make practice yours</h3><button class="icon-button" aria-label="Close settings" onclick={() => { settingsOpen = false; }}><Icon name="close"/></button></div><label><span><b>Show English by default</b><small>Keep the meaning close while you read.</small></span><input type="checkbox" bind:checked={settings.translation}/></label><label><span><b>Challenge me on tones</b><small>Require tone marks or numbers. Plain pinyin is accepted when off.</small></span><input type="checkbox" bind:checked={settings.strict}/></label><p class="small muted">Progress is stored on this device. Three consecutive correct pinyin answers help a character take root. A reveal brings it back for review.</p></section>{/if}
-      <div class="learning-layout"><div class="main-column">
+    <div class="location-bar"><span>当前位置 / You are here： <b>{view === 'practice' ? '拼音练习' : view === 'characters' ? '我的字库' : '例句查询'}</b></span><div class="script-toggle" aria-label="Character script"><button class:selected={!settings.traditional} aria-pressed={!settings.traditional} onclick={() => { settings.traditional = false; }}>简体 Simplified</button><span>|</span><button class:selected={settings.traditional} aria-pressed={settings.traditional} onclick={() => { settings.traditional = true; }}>繁體 Traditional</button></div></div>
+    {#if storageMessage}<p class="notice" role="status">{storageMessage}</p>{/if}
+    {#if settingsOpen}<section class="settings-panel"><div class="section-label"><h2>练习设置 / Settings</h2><button class="text-button" aria-label="Close settings" onclick={() => { settingsOpen = false; }}>关闭 Close ×</button></div><label><input type="checkbox" bind:checked={settings.translation}/> 显示英文 / Show English translation by default</label><label><input type="checkbox" bind:checked={settings.strict}/> 声调检查 / Require tone marks or numbers</label><p class="small muted">Progress is stored in this browser. A reading is mastered after three consecutive correct pinyin answers.</p></section>{/if}
+    <div class="learning-layout">
+      <div class="main-column">
         {#if view === 'practice'}
-          <div class="practice-tabs"><span class="active-tab"><Icon name="spark" size={16}/> {focus ? `Focus on ${focus}` : 'For you'}</span><span>Adapts as you learn</span>{#if focus}<button class="text-button" onclick={() => startPractice()}>Clear focus</button>{/if}</div>
+          <div class="practice-tabs"><strong>智能选题 / Adaptive practice</strong><span>{focus ? `重点字：${focus}` : 'Prioritizes characters you miss'}</span>{#if focus}<button class="text-button" onclick={() => startPractice()}>取消 Clear</button>{/if}</div>
           {#key round}<Practice {sentence} bind:progress {settings} {focus} onnext={() => startPractice(undefined, focus)}/>{/key}
-          <div class="practice-bottom"><span><Icon name="leaf" size={15}/> Every attempt helps your next sentence find you.</span><button class="text-button" onclick={() => startPractice(undefined, focus)}>Try another sentence <Icon name="arrow" size={15}/></button></div>
+          <div class="practice-bottom"><span>词句来自日常生活 / Everyday Chinese</span><button class="text-button" onclick={() => startPractice(undefined, focus)}>换一道题 / Skip sentence »</button></div>
         {:else}<Collection {view} {progress} useTraditional={settings.traditional} onpractice={startPractice}/>{/if}
-      </div><Companion {progress} onfocus={char => startPractice(undefined, char)}/></div>
-      <footer class="workspace-footer"><span><b lang="zh">日积月累</b> A little, every day.</span><span>{sentences.length} everyday sentences <span>·</span> {totalCharacters} characters <span>·</span> {mastered} readings taking root</span></footer>
+      </div>
+      <Companion {progress} {level} {streak} {mastered} onfocus={char => startPractice(undefined, char)}/>
     </div>
+    <footer class="site-footer"><p><b lang="zh">汉字老师</b>　|　{sentences.length} 例句 / sentences　|　{totalCharacters} 汉字 / characters</p><p>学习记录保存在当前浏览器。 Learning records are stored in this browser.</p><p>支持输入：nǐ / ni3 / ni / 你　 ·　 简体中文 / 繁體中文</p></footer>
   </main>
 </div>

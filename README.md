@@ -1,8 +1,8 @@
 # Hanzi Laoshi
 
-A small, cheerful SvelteKit reading studio for everyday Mandarin. Annotate individual characters, uncover their pinyin, and let the sentences adapt to the characters you miss.
+A SvelteKit reading trainer for everyday Mandarin. Annotate individual characters, uncover their pinyin, and let the sentences adapt to the characters you miss.
 
-The reading room takes its visual cues from Chinese stationery: jade book cloth, warm paper, vermilion seals, character practice grids, and an original Chinese print illustration of Xiao Hong. Each completed sentence adds a stamp to today's ten-sentence reading card. Layout, practice, companion, and collection styles are kept in separate small CSS files.
+The interface follows an early Chinese education portal: a compact centered page, red Songti/SimSun masthead, blue navigation, square panels, native form controls, and tabular learning records. It uses system fonts with no external font requests. Layout, practice, stats, and collection styles live in separate small CSS files.
 
 ## Run
 
@@ -59,4 +59,4 @@ The published Site starts private. Before offering public access to a paid TTS e
 - `src/routes/api/tts/` — server-only Cartesia integration
 - `tests/learning.test.ts` — grading, corpus integrity, review behavior, persistence
 
-UI event handlers stay close to the component they serve; shared functions have multiple callers. The red panda mascot was generated for this project.
+UI event handlers stay close to the component they serve; shared functions have multiple callers.

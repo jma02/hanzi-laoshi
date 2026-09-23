@@ -61,10 +61,10 @@
 </script>
 
 <section class="practice-card" class:finished={submitted}>
-  <div class="card-top"><span class="lesson-label"><span lang="zh">今日功课</span><span class="eyebrow">DAILY READING</span></span><span class="topic-pill">{sentence.category} <span>·</span> {sentence.level === 1 ? 'Beginner' : sentence.level === 2 ? 'Growing' : 'Stretch'}</span></div>
-  <div class="exercise-heading"><div><h2>A sentence worth knowing.</h2><p>Read the characters. Jot down their pinyin.</p></div><span class="lesson-seal" lang="zh" aria-label={submitted ? 'Read and reviewed' : 'Practice'}>{submitted ? '读过' : '练习'}</span></div>
+  <div class="card-top"><div class="lesson-label"><h1>看汉字，写拼音 <span>Read &amp; annotate</span></h1></div><span class="topic-pill">{sentence.category} <span>·</span> {sentence.level === 1 ? 'Beginner' : sentence.level === 2 ? 'Growing' : 'Stretch'}</span></div>
+  <div class="exercise-heading"><p><b>题目 / Sentence {sentence.id}</b>　请填写下列汉字的拼音。</p><span class:complete={submitted}>{submitted ? '[已提交 / Checked]' : '[答题中 / In progress]'}</span></div>
   <div class="sentence-tools"><AudioPlayer {sentence}/><span class="sentence-count">{answerCount} characters</span></div>
-  {#if focus}<div class="focus-note"><Icon name="repeat" size={15}/> A little extra practice with <strong lang="zh">{focus}</strong></div>{/if}
+  {#if focus}<div class="focus-note"><Icon name="repeat" size={15}/> 重点复习 / Focus character: <strong lang="zh">{focus}</strong></div>{/if}
   <form onsubmit={event => { event.preventDefault(); check(); }}>
     <div class="character-line" lang={settings.traditional ? 'zh-Hant' : 'zh-Hans'}>
       {#each characters as token}
@@ -93,22 +93,22 @@
                 }
               }}/>
             {#if results[token.position]}<span class="answer-label">{toneMark(token.pinyin)} {results[token.position] === 'correct' ? '✓' : results[token.position] === 'recognition' ? '◉' : '↺'}</span>
-            {:else}<button type="button" class="reveal" tabindex="-1" aria-label={`Reveal pinyin for ${token.display}`} title="Reveal pinyin (?)" onclick={() => { selected = token.position; reveal(token.position); }}><Icon name="eye" size={13}/> reveal</button>{/if}
+            {:else}<button type="button" class="reveal" tabindex="-1" aria-label={`Reveal pinyin for ${token.display}`} title="Reveal pinyin (?)" onclick={() => { selected = token.position; reveal(token.position); }}>答案 ?</button>{/if}
           </div>
         {:else}<span class="punctuation">{token.display}</span>{/if}
       {/each}
     </div>
     <p id="pinyin-shortcuts" class="small muted">Tab next · Shift+Tab back · Backspace on empty: back · ? reveal &amp; move on</p>
     <span class="sr-only" aria-live="polite">{announcement}</span>
-    <div class="translation"><span class="eyebrow"><span lang="zh">意思</span> · THE MEANING</span>{#if showTranslation}<p>{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> Show an English hint</button>{/if}</div>
+    <div class="translation"><span class="eyebrow"><span lang="zh">参考译文</span> / English translation</span>{#if showTranslation}<p>{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> 显示译文 / Show English</button>{/if}</div>
     {#if message}<p class="notice" role="status">{message}</p>{/if}
     <div class="exercise-footer">
-      {#if submitted}<div class="result-message" aria-live="polite"><span class="result-icon"><Icon name="check"/></span><div><strong>{correct === answerCount ? 'Beautifully read!' : 'A little more familiar already.'}</strong><span>{correct}/{answerCount} pinyin correct · +{earned} XP{Object.values(results).includes('recognition') ? ' · ◉ character recognized; tone untested' : ''}</span></div></div><button type="button" class="primary" onclick={onnext}>Next sentence <Icon name="arrow" size={18}/></button>
-      {:else}<button type="button" class="text-button muted" onclick={() => { for (const token of characters.filter(t => t.pinyin)) reveal(token.position); }}>Reveal all</button><div class="check-action"><span>{filled} / {answerCount} annotated</span><button bind:this={checkButton} class="primary" type="submit">Check my pinyin <Icon name="arrow" size={18}/></button></div>{/if}
+      {#if submitted}<div class="result-message" aria-live="polite"><span class="result-icon"><Icon name="check"/></span><div><strong>{correct === answerCount ? '全部正确 / All correct' : '已批改 / Answers checked'}</strong><span>{correct}/{answerCount} pinyin correct · +{earned} XP{Object.values(results).includes('recognition') ? ' · ◉ character recognized; tone untested' : ''}</span></div></div><button type="button" class="primary" onclick={onnext}>下一题 / Next »</button>
+      {:else}<button type="button" class="text-button muted" onclick={() => { for (const token of characters.filter(t => t.pinyin)) reveal(token.position); }}>显示全部答案 / Reveal all</button><div class="check-action"><span>{filled} / {answerCount} annotated</span><button bind:this={checkButton} class="primary" type="submit">提交答案 / Check</button></div>{/if}
     </div>
   </form>
 </section>
 <div class="below-practice">
-  <section class="character-note"><div class="note-character" lang="zh">{active?.display || '字'}</div><div><span class="eyebrow">CHARACTER SPOTLIGHT</span><h3>{active?.char ? ((glosses as Record<string,string>)[active.char] || 'A piece of your sentence') : 'Meet your next character'}</h3>{#if active?.pinyin && results[selected]}<p>{toneMark(active.pinyin)} <span>· meaning changes with context</span></p>{:else}<p>Select a character. Try its sound, then reveal to learn.</p>{/if}</div></section>
-  <details class="input-help"><summary><Icon name="help" size={17}/> A little pinyin help</summary><p>Type <b>nǐ</b>, <b>ni3</b>, or <b>ni</b>. Use <b>ü</b>, <b>v</b>, or <b>u:</b>. <b>Tab</b> or Space moves to the next character; <b>Shift+Tab</b> moves back. Press <b>Backspace</b> in an empty box to return to the previous editable character. Type <b>?</b> to reveal the focused character and move on. Chinese keyboards work too: commit one character per box.</p><p>Character input practices recognition; it does not test tones. Reveals count as a character to review. We show dictionary tones; 一, 不, third tones, and 儿 can sound different in natural speech.</p></details>
+  <section class="character-note"><div class="note-character" lang="zh">{active?.display || '字'}</div><div><span class="eyebrow">单字解释 / Character meaning</span><h3>{active?.char ? ((glosses as Record<string,string>)[active.char] || 'Meaning depends on context') : 'Select a character'}</h3>{#if active?.pinyin && results[selected]}<p>{toneMark(active.pinyin)} <span>· meaning changes with context</span></p>{:else}<p>Click a character to see its meaning. Reveal to check pronunciation.</p>{/if}</div></section>
+  <details class="input-help"><summary>输入帮助 / Pinyin &amp; tone rules</summary><p>Type <b>nǐ</b>, <b>ni3</b>, or <b>ni</b>. Use <b>ü</b>, <b>v</b>, or <b>u:</b>. <b>Tab</b> or Space moves to the next character; <b>Shift+Tab</b> moves back. Press <b>Backspace</b> in an empty box to return to the previous editable character. Type <b>?</b> to reveal the focused character and move on. Chinese keyboards work too: commit one character per box.</p><p>Character input practices recognition; it does not test tones. Reveals count as a character to review. We show dictionary tones; 一, 不, third tones, and 儿 can sound different in natural speech.</p></details>
 </div>

@@ -19,18 +19,18 @@ test('built Sites worker serves pages, APIs, and assets without the default cach
     assert.equal(page.status, 200);
     const html = await page.text();
     assert.match(html, /Hanzi Laoshi/);
-    assert.match(html, /red-panda.webp/);
+    assert.match(html, /Pinyin for/);
 
     const status = await worker.fetch(new Request('https://hanzi.test/api/tts'), env, ctx);
     assert.equal(status.status, 200);
     assert.deepEqual(await status.json(), { available: false });
 
-    for (const path of ['/favicon.svg', '/red-panda.webp', '/_app/immutable/entry/start.js']) {
+    for (const path of ['/favicon.svg', '/_app/immutable/entry/start.js']) {
       const response = await worker.fetch(new Request(`https://hanzi.test${path}`), env, ctx);
       assert.equal(response.status, 200);
       assert.equal(await response.text(), 'asset contents');
     }
-    assert.equal(assets.length, 3);
+    assert.equal(assets.length, 2);
     const head = await worker.fetch(new Request('https://hanzi.test/favicon.svg', { method: 'HEAD' }), env, ctx);
     assert.equal(await head.text(), '');
     const missing = await worker.fetch(new Request('https://hanzi.test/not-a-route'), env, ctx);
