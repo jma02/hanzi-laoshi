@@ -1,0 +1,9 @@
+node_modules/
+.svelte-kit/
+.sites-runtime/
+.wrangler/
+.env
+.env.*
+!.env.example
+.dev.vars
+dist/
