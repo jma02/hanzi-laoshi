@@ -7,7 +7,7 @@ await mkdir('dist/server', { recursive: true });
 await cp('.svelte-kit/cloudflare', 'dist/client', { recursive: true });
 await rm('dist/client/_worker.js');
 await build({
-  entryPoints: ['.svelte-kit/cloudflare/_worker.js'], outfile: 'dist/server/index.js',
+  entryPoints: ['scripts/sites-worker.mjs'], outfile: 'dist/server/index.js',
   bundle: true, format: 'esm', platform: 'browser', target: 'es2022',
   external: ['cloudflare:*', 'node:*'], conditions: ['workerd', 'worker', 'browser']
 });

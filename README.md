@@ -15,6 +15,7 @@ npm run dev
 npm run check
 npm test
 npm run build
+node --test tests/worker.test.mjs
 ```
 
 Svelte 5, SvelteKit, TypeScript, and the Cloudflare adapter. No application database or account system. Progress and preferences use `localStorage` under `hanzi-laoshi:v1`; they stay in one browser and origin. Clearing browser data clears progress.
@@ -42,7 +43,7 @@ References: [Cartesia bytes API](https://docs.cartesia.ai/api-reference/tts/byte
 
 ## Deployment
 
-`npm run build` creates normal `.svelte-kit/cloudflare` output for Cloudflare Workers and a `dist/server` + `dist/client` package for Sites. The small packaging script only arranges build output. Set production secrets with the hosting platform, never in source control.
+`npm run build` creates normal `.svelte-kit/cloudflare` output for Cloudflare Workers and a `dist/server` + `dist/client` package for Sites. The Sites entry serves SvelteKit and assets without the default Workers cache, which Sites does not permit. Browser cache headers remain intact. A regression test checks the built worker with Cache API access disabled. Set production secrets with the hosting platform, never in source control.
 
 The published Site starts private. Before offering public access to a paid TTS endpoint, add account-level quotas and abuse protection appropriate to the audience.
 
