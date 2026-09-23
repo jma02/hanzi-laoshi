@@ -14,6 +14,8 @@
   let values: Record<number, string> = {}, results: Record<number, string> = {};
   let selected = 0, submitted = false, message = '', earned = 0, showTranslation = settings.translation;
   let inputs: (HTMLInputElement | undefined)[] = [];
+  let checkButton: HTMLButtonElement | undefined;
+  let announcement = '';
   let composing = false;
   $: characters = tokens(sentence, settings.traditional);
   $: answerCount = characters.filter(t => t.pinyin).length;
@@ -26,6 +28,7 @@
     if (results[position] || submitted) return;
     const token = characters[position];
     results[position] = 'revealed'; values[position] = toneMark(token.pinyin);
+    announcement = `${token.display}: ${toneMark(token.pinyin)}`;
     recordCharacter(progress, token.char, token.pinyin, 'missed'); progress = { ...progress };
   }
 
@@ -33,6 +36,7 @@
     const next = characters.find(t => t.position > position && t.pinyin && !results[t.position]);
     await tick();
     if (next) { selected = next.position; inputs[next.position]?.focus(); }
+    else checkButton?.focus();
   }
 
   function check() {
@@ -66,26 +70,39 @@
       {#each characters as token}
         {#if token.pinyin}
           <div class:active={selected === token.position && !submitted} class="character-tile {results[token.position] || ''}">
-            <button type="button" class="hanzi" aria-label={`Select character ${token.display}`} onclick={() => { selected = token.position; inputs[token.position]?.focus(); }}>{token.display}</button>
-            <input bind:this={inputs[token.position]} bind:value={values[token.position]} aria-label={`Pinyin for ${token.display}, character ${token.position + 1}`} placeholder="pinyin" autocomplete="off" autocapitalize="none" spellcheck={false} disabled={Boolean(results[token.position]) || submitted}
+            <button type="button" class="hanzi" tabindex={submitted ? 0 : -1} aria-label={`Select character ${token.display}`} onclick={() => { selected = token.position; inputs[token.position]?.focus(); }}>{token.display}</button>
+            <input bind:this={inputs[token.position]} bind:value={values[token.position]} aria-label={`Pinyin for ${token.display}, character ${token.position + 1}`} aria-describedby="pinyin-shortcuts" aria-keyshortcuts="?" placeholder="pinyin" autocomplete="off" autocapitalize="none" spellcheck={false} disabled={Boolean(results[token.position]) || submitted}
               onfocus={() => { selected = token.position; }} oncompositionstart={() => { composing = true; }}
               oncompositionend={() => { composing = false; }}
-              onkeydown={event => { if (event.isComposing || composing || event.keyCode === 229) return; if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); if (token.position === characters.filter(t => t.pinyin).at(-1)?.position) check(); else nextField(token.position); } }}/>
+              onkeydown={event => {
+                if (event.isComposing || composing || event.keyCode === 229 || event.ctrlKey || event.metaKey || event.altKey) return;
+                if (event.key === '?' || event.key === '？') {
+                  event.preventDefault();
+                  if (event.repeat) return;
+                  reveal(token.position); nextField(token.position);
+                } else if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  if (token.position === characters.filter(t => t.pinyin).at(-1)?.position) check();
+                  else nextField(token.position);
+                }
+              }}/>
             {#if results[token.position]}<span class="answer-label">{toneMark(token.pinyin)} {results[token.position] === 'correct' ? '✓' : results[token.position] === 'recognition' ? '◉' : '↺'}</span>
-            {:else}<button type="button" class="reveal" aria-label={`Reveal pinyin for ${token.display}`} onclick={() => { selected = token.position; reveal(token.position); }}><Icon name="eye" size={13}/> reveal</button>{/if}
+            {:else}<button type="button" class="reveal" tabindex="-1" aria-label={`Reveal pinyin for ${token.display}`} title="Reveal pinyin (?)" onclick={() => { selected = token.position; reveal(token.position); }}><Icon name="eye" size={13}/> reveal</button>{/if}
           </div>
         {:else}<span class="punctuation">{token.display}</span>{/if}
       {/each}
     </div>
+    <p id="pinyin-shortcuts" class="small muted">Tab next · Shift+Tab back · ? reveal &amp; move on</p>
+    <span class="sr-only" aria-live="polite">{announcement}</span>
     <div class="translation"><span class="eyebrow">THE MEANING</span>{#if showTranslation}<p>{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> Show an English hint</button>{/if}</div>
     {#if message}<p class="notice" role="status">{message}</p>{/if}
     <div class="exercise-footer">
       {#if submitted}<div class="result-message" aria-live="polite"><span class="result-icon"><Icon name="check"/></span><div><strong>{correct === answerCount ? 'Beautifully read!' : 'A little more familiar already.'}</strong><span>{correct}/{answerCount} pinyin correct · +{earned} XP{Object.values(results).includes('recognition') ? ' · ◉ character recognized; tone untested' : ''}</span></div></div><button type="button" class="primary" onclick={onnext}>Next sentence <Icon name="arrow" size={18}/></button>
-      {:else}<button type="button" class="text-button muted" onclick={() => { for (const token of characters.filter(t => t.pinyin)) reveal(token.position); }}>Reveal all</button><div class="check-action"><span>{filled} / {answerCount} annotated</span><button class="primary" type="submit">Check my pinyin <Icon name="arrow" size={18}/></button></div>{/if}
+      {:else}<button type="button" class="text-button muted" onclick={() => { for (const token of characters.filter(t => t.pinyin)) reveal(token.position); }}>Reveal all</button><div class="check-action"><span>{filled} / {answerCount} annotated</span><button bind:this={checkButton} class="primary" type="submit">Check my pinyin <Icon name="arrow" size={18}/></button></div>{/if}
     </div>
   </form>
 </section>
 <div class="below-practice">
   <section class="character-note"><div class="note-character" lang="zh">{active?.display || '字'}</div><div><span class="eyebrow">CHARACTER SPOTLIGHT</span><h3>{active?.char ? ((glosses as Record<string,string>)[active.char] || 'A piece of your sentence') : 'Meet your next character'}</h3>{#if active?.pinyin && results[selected]}<p>{toneMark(active.pinyin)} <span>· meaning changes with context</span></p>{:else}<p>Select a character. Try its sound, then reveal to learn.</p>{/if}</div></section>
-  <details class="input-help"><summary><Icon name="help" size={17}/> A little pinyin help</summary><p>Type <b>nǐ</b>, <b>ni3</b>, or <b>ni</b>. Use <b>ü</b>, <b>v</b>, or <b>u:</b>. Space moves to the next character. Chinese keyboards work too: commit one character per box.</p><p>Character input practices recognition; it does not test tones. Reveals count as a character to review. We show dictionary tones; 一, 不, third tones, and 儿 can sound different in natural speech.</p></details>
+  <details class="input-help"><summary><Icon name="help" size={17}/> A little pinyin help</summary><p>Type <b>nǐ</b>, <b>ni3</b>, or <b>ni</b>. Use <b>ü</b>, <b>v</b>, or <b>u:</b>. <b>Tab</b> or Space moves to the next character; <b>Shift+Tab</b> moves back. Type <b>?</b> to reveal the focused character and move on. Chinese keyboards work too: commit one character per box.</p><p>Character input practices recognition; it does not test tones. Reveals count as a character to review. We show dictionary tones; 一, 不, third tones, and 儿 can sound different in natural speech.</p></details>
 </div>

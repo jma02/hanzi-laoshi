@@ -2,6 +2,7 @@
 
 :root { font-family: 'DM Sans', 'Avenir Next', sans-serif; color: #35332e; background: #faf8f5; font-synthesis: none; --accent: #a54533; --green: #426b50; --muted: #85837b; --line: #e9e5de; }
 * { box-sizing: border-box; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 body { margin: 0; font-size: 16px; }
 button, input, select { font: inherit; }
 button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }

@@ -25,6 +25,7 @@ Svelte 5, SvelteKit, TypeScript, and the Cloudflare adapter. No application data
 - 440 original sentences across 12 everyday topics, with English and per-character numbered pinyin. Content lives in two JSON files, one sentence per line.
 - Simplified by default. OpenCC supplies contextual traditional forms; progress keeps the same simplified-character/reading key across scripts.
 - Inputs accept `nǐ`, `ni3`, plain `ni`, and `ü` / `v` / `u:`. An explicit wrong tone remains wrong. Enable tone challenge to require tones.
+- Tab moves directly between character inputs; Shift+Tab moves back. Type `?` to reveal the focused character and advance, skipping revealed characters. After the last character, the reveal shortcut focuses Check. Shortcuts leave IME composition and browser modifier keys alone.
 - Chinese IME composition is not interrupted. Commit one simplified or contextual traditional character in each box. This is labeled recognition, with no pinyin mastery credit, because a committed character cannot prove which tone was typed.
 - Reveals and incorrect answers become review signals. Blank checks do not change progress. Each answer is counted once per exercise.
 - Selection weights frequent misses and avoids the last 12 completed sentences when alternatives exist. Click a character to focus on it.
