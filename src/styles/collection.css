@@ -1,10 +1,10 @@
 .collection-card { border: 1px solid #8eaaca; }
-.collection-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; padding: 8px 10px; color: #143f7e; background: linear-gradient(#f7fbff, #dce9f8); border-bottom: 1px solid #a6bdd7; }
+.collection-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; padding: 10px 12px; color: #143f7e; background: #edf3fb; border-bottom: 1px solid #a6bdd7; }
 .collection-heading h1 { font-size: 18px; }
 .collection-heading > span { font-size: 12px; }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 10px; align-items: center; }
 .search { display: flex; align-items: center; gap: 8px; font-size: 14px; flex: 1; }
-.search input { min-width: 0; width: 100%; flex: 1; border: 1px solid #888; padding: 5px; font-size: 16px; border-radius: 0; }
+.search input { min-width: 0; width: 100%; flex: 1; border: 1px solid #a9b6ca; padding: 7px; font-size: 16px; border-radius: 0; }
 .filters select { max-width: 100%; font-size: 14px; padding: 5px; border-radius: 0; }
 .result-count { font-size: 12px; padding: 0 10px 8px; color: #555; }
 .result-count b { color: #c00; }
@@ -20,7 +20,7 @@
 .sentence-row { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px; border: 0; border-top: 1px dotted #bac8d9; background: #fff; text-align: left; }
 .sentence-row:nth-child(even) { background: #f4f7fb; }
 .sentence-row:hover { background: #fffee7; }
-.row-number { font: 12px Arial, sans-serif; color: #777; }
+.row-number { font: 12px var(--latin); color: #777; }
 .sentence-copy { flex: 1; }
 .sentence-copy strong { display: block; font-size: 21px; font-weight: normal; color: #0645ad; text-decoration: underline; }
 .sentence-copy > span { display: block; margin-top: 5px; font-size: 14px; color: #444; }

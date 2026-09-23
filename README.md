@@ -2,7 +2,7 @@
 
 A SvelteKit reading trainer for everyday Mandarin. Annotate individual characters, uncover their pinyin, and let the sentences adapt to the characters you miss.
 
-The interface follows an early Chinese education portal: a compact centered page, red Songti/SimSun masthead, blue navigation, square panels, native form controls, and tabular learning records. It uses system fonts with no external font requests. Layout, practice, stats, and collection styles live in separate small CSS files.
+The interface follows an early Chinese education portal: a compact centered page, red Songti/SimSun masthead, cobalt navigation, square panels, and tabular learning records. Self-hosted IBM Plex Mono gives the English interface and pinyin a technical feel, paired with system Songti/SimSun for Chinese. Font files and their OFL license live in `static/fonts/`; no external font requests are needed. Layout, practice, stats, and collection styles live in separate small CSS files.
 
 ## Run
 
