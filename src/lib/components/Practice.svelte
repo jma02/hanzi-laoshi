@@ -76,7 +76,13 @@
               oncompositionend={() => { composing = false; }}
               onkeydown={event => {
                 if (event.isComposing || composing || event.keyCode === 229 || event.ctrlKey || event.metaKey || event.altKey) return;
-                if (event.key === '?' || event.key === '？') {
+                if (event.key === 'Backspace' && event.currentTarget.value === '') {
+                  event.preventDefault();
+                  if (event.repeat) return;
+                  const previous = characters.slice(0, token.position).reverse().find(t => t.pinyin && !results[t.position]);
+                  const input = previous && inputs[previous.position];
+                  if (input) { input.focus(); input.setSelectionRange(input.value.length, input.value.length); }
+                } else if (event.key === '?' || event.key === '？') {
                   event.preventDefault();
                   if (event.repeat) return;
                   reveal(token.position); nextField(token.position);
@@ -92,7 +98,7 @@
         {:else}<span class="punctuation">{token.display}</span>{/if}
       {/each}
     </div>
-    <p id="pinyin-shortcuts" class="small muted">Tab next · Shift+Tab back · ? reveal &amp; move on</p>
+    <p id="pinyin-shortcuts" class="small muted">Tab next · Shift+Tab back · Backspace on empty: back · ? reveal &amp; move on</p>
     <span class="sr-only" aria-live="polite">{announcement}</span>
     <div class="translation"><span class="eyebrow">THE MEANING</span>{#if showTranslation}<p>{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> Show an English hint</button>{/if}</div>
     {#if message}<p class="notice" role="status">{message}</p>{/if}
@@ -104,5 +110,5 @@
 </section>
 <div class="below-practice">
   <section class="character-note"><div class="note-character" lang="zh">{active?.display || '字'}</div><div><span class="eyebrow">CHARACTER SPOTLIGHT</span><h3>{active?.char ? ((glosses as Record<string,string>)[active.char] || 'A piece of your sentence') : 'Meet your next character'}</h3>{#if active?.pinyin && results[selected]}<p>{toneMark(active.pinyin)} <span>· meaning changes with context</span></p>{:else}<p>Select a character. Try its sound, then reveal to learn.</p>{/if}</div></section>
-  <details class="input-help"><summary><Icon name="help" size={17}/> A little pinyin help</summary><p>Type <b>nǐ</b>, <b>ni3</b>, or <b>ni</b>. Use <b>ü</b>, <b>v</b>, or <b>u:</b>. <b>Tab</b> or Space moves to the next character; <b>Shift+Tab</b> moves back. Type <b>?</b> to reveal the focused character and move on. Chinese keyboards work too: commit one character per box.</p><p>Character input practices recognition; it does not test tones. Reveals count as a character to review. We show dictionary tones; 一, 不, third tones, and 儿 can sound different in natural speech.</p></details>
+  <details class="input-help"><summary><Icon name="help" size={17}/> A little pinyin help</summary><p>Type <b>nǐ</b>, <b>ni3</b>, or <b>ni</b>. Use <b>ü</b>, <b>v</b>, or <b>u:</b>. <b>Tab</b> or Space moves to the next character; <b>Shift+Tab</b> moves back. Press <b>Backspace</b> in an empty box to return to the previous editable character. Type <b>?</b> to reveal the focused character and move on. Chinese keyboards work too: commit one character per box.</p><p>Character input practices recognition; it does not test tones. Reveals count as a character to review. We show dictionary tones; 一, 不, third tones, and 儿 can sound different in natural speech.</p></details>
 </div>
