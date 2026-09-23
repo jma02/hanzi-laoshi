@@ -1,0 +1,25 @@
+.collection-card { padding: 27px; border-top: 4px solid var(--green); }
+.collection-heading { align-items: flex-start; }
+.collection-heading .eyebrow { color: #8a653f; font-size: 11px; }
+.collection-heading h2 { margin-top: 10px; }
+.filters { display: flex; gap: 12px; margin: 26px 0 18px; }
+.search { display: flex; align-items: center; gap: 10px; border: 1px solid #b9ad90; border-radius: 3px; padding: 12px; flex: 1; min-width: 0; color: #87795d; }
+.search:focus-within { outline: 2px solid #bf8450; outline-offset: 2px; }
+.search input { border: 0; outline: 0; min-width: 0; width: 100%; font-size: 16px; background: transparent; }
+.filters select { border: 1px solid #b9ad90; background: #f5ead1; border-radius: 3px; padding: 10px; font-size: 14px; color: #665940; max-width: 40%; }
+.sentence-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; width: 100%; text-align: left; padding: 20px 8px; border-bottom: 1px solid #d8ccb1; }
+.sentence-row:hover { background: #f0e6ce; }
+.sentence-row strong { display: block; font-family: var(--serif); font-size: 23px; font-weight: 500; line-height: 1.6; }
+.sentence-row > span > span { display: block; font-size: 14px; color: #78684c; margin-top: 6px; }
+.row-topic { display: flex; align-items: center; gap: 14px; font-size: 12px; color: #85633b; }
+.load-more { margin: 25px auto 0; display: flex; }
+.empty-state { text-align: center; padding: 45px 15px; }
+.empty-state > span { display: inline-grid; place-items: center; width: 85px; height: 85px; border: 4px double #b86a4b; transform: rotate(-5deg); font: 55px var(--serif); color: var(--accent); }
+.empty-state h3 { margin-top: 25px; }
+.empty-state p { margin: 12px 0 25px; font-size: 14px; color: var(--muted); }
+.character-collection { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 13px; }
+.collected-character { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 17px 10px; border: 1px solid #c5b496; background: #f7edd7; box-shadow: 2px 2px 0 #e4d6b7; }
+.collected-character:hover { background: #e9edda; border-color: #8e9e78; }
+.collected-character .hanzi-small { font: 40px var(--serif); }
+.collected-character strong { font-size: 16px; color: var(--accent); }
+.collected-character > span:not(:first-child), .collected-character small { font-size: 12px; color: #776447; }

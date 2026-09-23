@@ -60,9 +60,9 @@
   }
 </script>
 
-<section class="practice-card">
-  <div class="card-top"><span class="eyebrow">YOUR NEXT LITTLE DISCOVERY</span><span class="topic-pill">{sentence.category} <span>·</span> {sentence.level === 1 ? 'Beginner' : sentence.level === 2 ? 'Growing' : 'Stretch'}</span></div>
-  <div class="exercise-heading"><div><h2>One sentence. A little closer.</h2><p>What do these characters say? Give each one its pinyin.</p></div></div>
+<section class="practice-card" class:finished={submitted}>
+  <div class="card-top"><span class="lesson-label"><span lang="zh">今日功课</span><span class="eyebrow">DAILY READING</span></span><span class="topic-pill">{sentence.category} <span>·</span> {sentence.level === 1 ? 'Beginner' : sentence.level === 2 ? 'Growing' : 'Stretch'}</span></div>
+  <div class="exercise-heading"><div><h2>A sentence worth knowing.</h2><p>Read the characters. Jot down their pinyin.</p></div><span class="lesson-seal" lang="zh" aria-label={submitted ? 'Read and reviewed' : 'Practice'}>{submitted ? '读过' : '练习'}</span></div>
   <div class="sentence-tools"><AudioPlayer {sentence}/><span class="sentence-count">{answerCount} characters</span></div>
   {#if focus}<div class="focus-note"><Icon name="repeat" size={15}/> A little extra practice with <strong lang="zh">{focus}</strong></div>{/if}
   <form onsubmit={event => { event.preventDefault(); check(); }}>
@@ -100,7 +100,7 @@
     </div>
     <p id="pinyin-shortcuts" class="small muted">Tab next · Shift+Tab back · Backspace on empty: back · ? reveal &amp; move on</p>
     <span class="sr-only" aria-live="polite">{announcement}</span>
-    <div class="translation"><span class="eyebrow">THE MEANING</span>{#if showTranslation}<p>{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> Show an English hint</button>{/if}</div>
+    <div class="translation"><span class="eyebrow"><span lang="zh">意思</span> · THE MEANING</span>{#if showTranslation}<p>{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> Show an English hint</button>{/if}</div>
     {#if message}<p class="notice" role="status">{message}</p>{/if}
     <div class="exercise-footer">
       {#if submitted}<div class="result-message" aria-live="polite"><span class="result-icon"><Icon name="check"/></span><div><strong>{correct === answerCount ? 'Beautifully read!' : 'A little more familiar already.'}</strong><span>{correct}/{answerCount} pinyin correct · +{earned} XP{Object.values(results).includes('recognition') ? ' · ◉ character recognized; tone untested' : ''}</span></div></div><button type="button" class="primary" onclick={onnext}>Next sentence <Icon name="arrow" size={18}/></button>

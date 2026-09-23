@@ -1,0 +1,121 @@
+@media (min-width: 1600px) {
+  .character-tile { width: 86px; }
+  .hanzi { font-size: 48px; height: 86px; }
+}
+@media (max-width: 1250px) {
+  .app-shell { grid-template-columns: 204px minmax(0, 1fr); }
+  .sidebar { padding: 30px 13px 20px; }
+  .sidebar-label { letter-spacing: .8px; }
+  .workspace { padding: 28px 26px; }
+  .topbar { padding-inline: 26px; }
+  .learning-layout { grid-template-columns: minmax(0, 1fr) 240px; gap: 22px; }
+  .practice-card { padding-inline: 22px; }
+  .exercise-footer { margin-inline: -22px; padding-inline: 20px; }
+  .audio-label, .check-action > span { display: none; }
+  .page-heading { align-items: flex-start; }
+  .script-toggle { margin-top: 32px; }
+  .script-toggle button span { display: none; }
+  .top-stats { gap: 15px; }
+  .top-stats > span:first-child > span { display: none; }
+  .card-top { flex-wrap: wrap; }
+  .character-line { gap: 8px; }
+  .character-tile { width: 70px; }
+  .hanzi { font-size: 40px; height: 70px; }
+  h2 { font-size: 26px; }
+  .practice-bottom { flex-wrap: wrap; }
+}
+@media (max-width: 1080px) {
+  .learning-layout { grid-template-columns: minmax(0, 1fr); }
+  .companion-column { display: grid; grid-template-columns: 1fr 1fr; padding-top: 10px; align-items: start; }
+  .mascot-card { grid-row: span 2; }
+  .mascot-card img { max-height: 275px; object-fit: cover; object-position: center 57%; }
+  .reading-stamps > span { max-height: 40px; }
+  .character-tile { width: 76px; }
+  .hanzi { height: 76px; font-size: 43px; }
+  .topbar { min-height: 62px; }
+  .breadcrumb > strong, .breadcrumb > span:not(.room-label) { display: none; }
+}
+@media (max-width: 720px) {
+  .app-shell { display: block; }
+  .sidebar { position: static; height: auto; padding: 17px 18px 0; border-right: 0; border-bottom: 4px double #829279; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 17px; overflow: visible; }
+  .brand { margin: 0; font-size: 24px; gap: 10px; }
+  .brand-mark { width: 48px; height: 49px; font-size: 19px; }
+  .sidebar-label, .level-card, .local-save { display: none; }
+  .sidebar-bottom { margin: 0 0 0 auto; order: 1; }
+  .settings-button { font-size: 0; padding: 12px; }
+  .sidebar nav { order: 2; display: flex; width: 100%; gap: 3px; justify-content: space-between; }
+  .sidebar nav button { font-size: 12px; padding: 12px 8px; gap: 6px; border-radius: 3px 3px 0 0; }
+  .sidebar nav button svg { display: none; }
+  .sidebar nav button small { font-size: 11px; }
+  .sidebar nav .current { box-shadow: inset 0 -3px #e3ae64; }
+  .nav-indicator { display: none; }
+  .topbar { padding: 12px 20px; min-height: 55px; gap: 12px; }
+  .breadcrumb { font-size: 11px; gap: 7px; }
+  .breadcrumb .room-label { font-size: 15px; padding-right: 7px; }
+  .top-stats { font-size: 12px; gap: 12px; }
+  .avatar { display: none; }
+  .workspace { padding: 24px 18px; }
+  .page-heading { margin-bottom: 28px; gap: 8px; }
+  .page-heading h1 { font-size: 26px; }
+  .heading-chinese { font-size: 35px; letter-spacing: 5px; margin-bottom: 6px; }
+  .page-heading p { font-size: 14px; line-height: 1.6; }
+  .greeting { font-size: 9px; gap: 7px; letter-spacing: .9px; }
+  .greeting > span { font-size: 12px; flex-shrink: 0; }
+  .script-toggle { flex-direction: column; margin-top: 32px; padding: 3px; }
+  .script-toggle button { padding: 6px 8px; font-size: 17px; }
+  .practice-card { padding-inline: 17px; }
+  .card-top { margin-inline: -9px; padding-inline: 9px; }
+  .lesson-label { gap: 7px; }
+  .lesson-label .eyebrow { font-size: 9px; }
+  .topic-pill { font-size: 11px; padding: 4px 6px; }
+  .exercise-heading { margin-block: 22px; }
+  h2 { font-size: 24px; }
+  .exercise-heading p { font-size: 14px; }
+  .lesson-seal { width: 40px; height: 44px; font-size: 20px; }
+  .sentence-count { font-size: 11px; }
+  .character-line { gap: 7px; margin-top: 25px; }
+  .character-tile { width: 68px; }
+  .hanzi { height: 68px; font-size: 39px; }
+  .punctuation { font-size: 24px; margin-top: 20px; }
+  .exercise-footer { margin-inline: -17px; padding: 17px; flex-wrap: wrap; }
+  .primary { padding: 13px; }
+  .result-message { flex: 1 1 100%; }
+  .character-note { gap: 14px; }
+  .character-note h3 { font-size: 16px; }
+  .note-character { width: 55px; height: 62px; }
+  .companion-column { gap: 20px; }
+  .mascot-card { grid-column: 1 / -1; grid-row: auto; display: grid; grid-template-columns: 42% 1fr; }
+  .mascot-intro { grid-column: 2; padding: 15px 14px; border-bottom: 0; }
+  .mascot-card img { grid-column: 1; grid-row: 1 / 3; height: 100%; max-height: 210px; aspect-ratio: auto; }
+  .mascot-caption { grid-column: 2; padding: 6px 14px 20px; border-top: 0; background: transparent; text-align: left; }
+  .mascot-caption h3 { font-size: 20px; line-height: 1.6; }
+  .daily-card { padding: 17px 14px; }
+  .daily-card .section-label h3, .review-card .section-label h3 { font-size: 18px; }
+  .daily-card .section-label > span { display: none; }
+  .reading-stamps { gap: 5px; }
+  .reading-stamps .stamped { border-width: 1px; }
+  .reading-stamps .stamped > span { font-size: 18px; }
+  .daily-number { font-size: 33px; }
+  .daily-number .daily-day { display: none; }
+  .workspace-footer { margin-top: 28px; gap: 10px; line-height: 1.8; }
+  .collection-card { padding: 22px 17px; }
+  .collection-heading { flex-wrap: wrap; }
+  .row-topic { font-size: 0; gap: 0; }
+  .sentence-row { gap: 10px; padding-inline: 0; }
+  .sentence-row strong { font-size: 21px; }
+  .filters { flex-wrap: wrap; }
+  .filters select { max-width: 100%; }
+  .character-collection { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 380px) {
+  .companion-column { grid-template-columns: 1fr; }
+  .reading-stamps > span { max-height: none; }
+  .reading-stamps .stamped > span { font-size: 26px; }
+  .character-tile { width: 64px; }
+  .hanzi { height: 64px; }
+  .sentence-tools { flex-wrap: wrap; }
+  .practice-tabs { gap: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

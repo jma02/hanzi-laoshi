@@ -2,6 +2,8 @@
 
 A small, cheerful SvelteKit reading studio for everyday Mandarin. Annotate individual characters, uncover their pinyin, and let the sentences adapt to the characters you miss.
 
+The reading room takes its visual cues from Chinese stationery: jade book cloth, warm paper, vermilion seals, character practice grids, and an original Chinese print illustration of Xiao Hong. Each completed sentence adds a stamp to today's ten-sentence reading card. Layout, practice, companion, and collection styles are kept in separate small CSS files.
+
 ## Run
 
 Node 24+ and npm:
