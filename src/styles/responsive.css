@@ -1,7 +1,7 @@
 @media (max-width: 1000px) {
   .portal { width: calc(100% - 40px); }
-  .learning-layout { grid-template-columns: minmax(0, 1fr) 205px; gap: 25px; }
-  .portal-nav { gap: 26px; }
+  .learning-layout { grid-template-columns: minmax(0, 1fr) 240px; gap: 22px; }
+  .portal-nav { gap: 8px; }
   .nav-copy { display: block; }
   .nav-copy small { display: block; margin-top: 3px; }
   .worksheet { padding-inline: 26px; }
@@ -15,7 +15,8 @@
   .companion-column { grid-template-columns: 1fr 1fr; gap: 26px; padding-top: 12px; align-items: start; }
   .classroom-picture { grid-column: 2; }
   .help-panel { grid-column: 1; grid-row: 2; }
-  .portal-nav { justify-content: space-between; gap: 12px; }
+  .portal-nav { justify-content: space-between; gap: 4px; }
+  .portal-nav button { flex: 1; padding-inline: 10px; }
   .portal-nav button:last-child { margin-left: 0; }
   .site-description { font-size: 14px; }
   .site-description > span { font-size: 17px; }
@@ -24,14 +25,16 @@
   .row-topic { display: none; }
 }
 @media (max-width: 520px) {
-  .portal { width: calc(100% - 28px); }
+  .portal { width: calc(100% - 24px); }
   .masthead { gap: 10px; padding: 19px 0 15px; }
   .brand { display: block; }
   .brand strong { font-size: 33px; letter-spacing: 2px; }
   .brand > span { display: block; font-size: 15px; margin-top: 1px; }
   .site-description { max-width: 140px; }
   .site-description > span { font-size: 15px; }
-  .nav-copy b { font-size: 19px; }
+  .portal-nav { padding: 4px; border-radius: 16px; gap: 2px; }
+  .portal-nav button { padding: 8px 4px; }
+  .nav-copy b { font-size: 18px; }
   .nav-copy small { font-size: 14px; }
   .location-bar { padding: 15px 0; gap: 7px; }
   .location-bar > span { display: none; }
@@ -39,8 +42,9 @@
   .practice-tabs { font-size: 14px; gap: 6px; }
   .practice-tabs > span { font-size: 13px; }
   .worksheet { padding: 23px 18px 20px; }
-  .worksheet-header h1 { font-size: 28px; letter-spacing: 2px; }
-  .worksheet-header > p { font-size: 14px; }
+  .worksheet-header h1 { font-size: 26px; letter-spacing: 2px; }
+  .lesson-heading { gap: 8px; --sprite-size: 54px; }
+  .lesson-heading p { font-size: 14px; }
   .lesson-meta { margin-top: 21px; font-size: 13px; }
   .exercise-heading { padding-top: 22px; }
   .exercise-heading h2, .translation h2 { font-size: 21px; }
@@ -51,10 +55,12 @@
   .character-tile input { font-size: 21px; }
   .punctuation { padding-top: 72px; font-size: 28px; margin-right: 4px; }
   .translation p { font-size: 19px; }
+  .translation { padding: 16px; }
   .exercise-footer > .text-button { font-size: 14px; }
   .primary { padding: 9px 15px; }
   .result-message { flex-basis: 100%; }
-  .companion-column { gap: 24px 18px; }
+  .companion-column { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .classroom-picture, .help-panel { grid-column: auto; grid-row: auto; }
   .panel-title { font-size: 21px; gap: 5px; }
   .panel-title > span { font-size: 14px; }
   .stats-table th, .stats-table td { font-size: 14px; padding-block: 9px; }
@@ -62,10 +68,13 @@
   .goal-boxes > span { height: 14px; }
   .review-panel > p, .help-panel > p { font-size: 14px; }
   .review-table, .review-table .text-button { font-size: 14px; }
-  .character-note { align-items: flex-start; gap: 12px; }
+  .character-note { align-items: flex-start; gap: 12px; padding: 13px; }
   .note-character { width: 54px; height: 54px; font-size: 37px; }
   .collection-card { padding-inline: 18px; }
   .collection-heading h1 { font-size: 25px; }
+  .settings-panel { padding: 20px; }
+  .settings-panel .section-label { align-items: flex-start; }
+  .settings-panel .section-label > button { flex-shrink: 0; }
   .site-footer { font-size: 14px; gap: 8px; }
 }
 @media (max-width: 360px) {
