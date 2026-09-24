@@ -1,39 +1,23 @@
-.companion-column { display: grid; align-content: start; gap: 20px; padding-top: 40px; min-width: 0; }
-.stats-panel, .review-panel, .help-panel { min-width: 0; padding: 19px 17px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-soft); box-shadow: var(--shadow); }
-.stats-panel { background: #f0f1e7; }
-.panel-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; padding-bottom: 12px; font: 600 19px var(--ui); border-bottom: 1px solid var(--line); }
-.panel-title > span, .help-panel summary > span { font: 13px var(--ui); color: var(--muted); }
-.stats-table, .review-table { border-collapse: collapse; width: 100%; font-size: 15px; }
-.stats-table th, .stats-table td { border-bottom: 1px solid var(--line); padding: 11px 0; text-align: left; font-weight: normal; }
-.stats-table tr:last-child th, .stats-table tr:last-child td { border-bottom: 0; }
-.stats-table th { font-size: 14px; color: var(--ink); }
-.stats-table th small { display: block; font-size: 12px; color: var(--muted); }
-.stats-table td { padding-left: 8px; text-align: right; font-size: 14px; font-variant-numeric: tabular-nums; }
-.stats-table .score { color: var(--red); font-weight: 700; }
-.daily-goal { margin: 4px 0 12px; padding: 12px 10px 10px; border: 1px solid #d3dbc7; border-radius: 13px; background: #f1f2e5; }
-.goal-boxes { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; }
-.goal-boxes > span { height: 17px; border: 1px solid #c6ceb7; border-radius: 5px; background: #fcfcf4; }
-.goal-boxes .done { background: var(--sage); border-color: var(--sage); }
-.daily-goal p { font-size: 14px; line-height: 1.5; color: #526447; margin-top: 9px; }
-.review-table th { font-size: 13px; padding: 11px 2px 8px; color: var(--muted); font-weight: normal; }
-.review-table td { padding: 8px 2px; border-bottom: 1px solid var(--line); text-align: center; }
-.review-table td[lang] { font-size: 28px; }
-.review-table .text-button { font-size: 13px; white-space: nowrap; }
-.review-panel > p, .help-panel > p { padding-top: 12px; font-size: 14px; line-height: 1.65; color: var(--muted); }
-.review-panel > p + p { padding-top: 6px; }
-.classroom-picture { margin: 0; padding: 7px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: var(--shadow); }
-.classroom-picture img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) - 7px); }
-.help-panel { background: #f2f1e6; border-color: #d9dccb; }
-.help-panel summary { font: 600 17px var(--ui); line-height: 1.5; cursor: pointer; }
-.help-panel summary::marker { color: var(--sage); font-size: 14px; }
-.help-panel summary > span { margin-left: 4px; }
-.help-panel dl { margin: 0; padding-top: 14px; font-size: 14px; }
-.help-panel dt { margin-top: 12px; color: var(--sage); font-weight: 700; }
-.help-panel dt:first-child { margin-top: 0; }
-.help-panel dd { margin: 3px 0 0; color: var(--muted); line-height: 1.5; }
-.today-progress { display: flex; align-items: center; justify-content: space-between; padding: 18px 0 12px; --sprite-size: 68px; }
-.today-progress > div > span { font-size: 14px; }
-.today-progress p { line-height: 1.3; margin-top: 5px; }
-.today-progress p b { font-size: 38px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.today-progress p span, .today-progress small { font-size: 13px; color: var(--muted); }
-.help-panel dd small { display: block; font-size: 13px; }
+.companion-column { display: grid; align-content: start; gap: 28px; padding-top: 4px; min-width: 0; }
+.stats-panel, .review-panel { min-width: 0; }
+.panel-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; padding-bottom: 12px; font: 500 15px var(--ui); border-bottom: 1px solid var(--rule); }
+.panel-title > span { font: 12px var(--ui); color: var(--muted); }
+.today-progress { display: flex; align-items: center; justify-content: space-between; padding: 16px 0 13px; --sprite-size: 28px; }
+.today-progress > div > span { font-size: 13px; }
+.today-progress small { margin-left: 4px; font-size: 12px; color: var(--muted); }
+.today-progress p { line-height: 1.3; margin-top: 6px; }
+.today-progress p b { font: 400 36px/1 var(--latin); font-variant-numeric: tabular-nums; }
+.today-progress p span { font-size: 12px; color: var(--muted); }
+.goal-boxes { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; margin-bottom: 15px; }
+.goal-boxes > span { height: 4px; background: var(--line); }
+.goal-boxes .done { background: var(--sage); }
+.stats-table, .review-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.stats-table th, .stats-table td { border-bottom: 1px solid var(--line); padding: 10px 0; text-align: left; font-weight: normal; }
+.stats-table th small { display: block; font-size: 11px; color: var(--muted); }
+.stats-table td { padding-left: 8px; text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; }
+.review-table th { font-size: 12px; padding: 11px 2px 8px; color: var(--muted); font-weight: normal; }
+.review-table td { padding: 6px 2px; border-bottom: 1px solid var(--line); text-align: center; }
+.review-table td[lang] { font: 28px var(--song); }
+.review-table .text-button { font-size: 12px; white-space: nowrap; }
+.review-panel > p { padding-top: 12px; font-size: 13px; color: var(--muted); }
+.review-panel .supporting { font-size: 12px; line-height: 1.6; }

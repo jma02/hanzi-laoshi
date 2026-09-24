@@ -1,86 +1,83 @@
 @media (max-width: 1000px) {
-  .portal { width: calc(100% - 40px); }
-  .learning-layout { grid-template-columns: minmax(0, 1fr) 240px; gap: 22px; }
-  .portal-nav { gap: 8px; }
-  .nav-copy { display: block; }
-  .nav-copy small { display: block; margin-top: 3px; }
-  .worksheet { padding-inline: 26px; }
-  .audio-label, .check-action > span { display: none; }
-  .character-tile { width: 70px; }
-  .hanzi { font-size: 50px; height: 80px; }
-  .practice-tabs > span { margin-left: 0; }
-}
-@media (max-width: 760px) {
-  .learning-layout { grid-template-columns: minmax(0, 1fr); }
-  .companion-column { grid-template-columns: 1fr 1fr; gap: 26px; padding-top: 12px; align-items: start; }
-  .classroom-picture { grid-column: 2; }
-  .help-panel { grid-column: 1; grid-row: 2; }
-  .portal-nav { justify-content: space-between; gap: 4px; }
-  .portal-nav button { flex: 1; padding-inline: 10px; }
-  .portal-nav button:last-child { margin-left: 0; }
-  .site-description { font-size: 14px; }
-  .site-description > span { font-size: 17px; }
+  .portal { width: calc(100% - 48px); }
+  .learning-layout { grid-template-columns: minmax(0, 1fr) 184px; gap: 26px; }
+  .portal-nav { gap: 20px; }
+  .worksheet, .collection-card { padding-inline: 26px; }
   .character-tile { width: 76px; }
-  .hanzi { height: 86px; font-size: 54px; }
+  .character-tile input { font-size: 20px; }
+  .hanzi { font-size: 52px; height: 83px; }
+  .check-action > span { display: none; }
   .row-topic { display: none; }
+}
+@media (max-width: 800px) {
+  .learning-layout { grid-template-columns: minmax(0, 1fr); }
+  .companion-column { grid-template-columns: 1fr 1fr; gap: 36px; padding-top: 14px; align-items: start; }
+  .brand { display: block; }
+  .brand > span { display: block; margin-top: 3px; }
+  .character-tile { width: 78px; }
+  .hanzi { height: 89px; font-size: 56px; }
 }
 @media (max-width: 520px) {
   .portal { width: calc(100% - 24px); }
-  .masthead { gap: 10px; padding: 19px 0 15px; }
-  .brand { display: block; }
-  .brand strong { font-size: 27px; letter-spacing: 1px; }
-  .brand > span { display: block; font-size: 13px; margin-top: 4px; }
-  .site-description { max-width: 140px; }
-  .site-description > span { font-size: 15px; }
-  .portal-nav { padding: 0; gap: 4px; }
-  .portal-nav button { padding: 8px 0 12px; }
-  .nav-copy b { font-size: 16px; white-space: nowrap; }
-  .nav-copy small { font-size: 12px; }
-  .location-bar { padding: 15px 0; gap: 7px; }
-  .location-bar > span { display: none; }
-  .script-toggle { margin-left: auto; }
-  .practice-tabs { font-size: 14px; gap: 6px; }
-  .practice-tabs > span { font-size: 13px; }
-  .worksheet { padding: 23px 18px 20px; }
-  .worksheet-header h1 { font-size: 26px; letter-spacing: 0; }
-  .lesson-heading { gap: 12px; --sprite-size: 64px; }
-  .lesson-heading p { font-size: 14px; }
-  .lesson-meta { margin-top: 16px; gap: 12px; font-size: 14px; }
-  .lesson-meta small { display: block; margin: 2px 0 0; }
-  .exercise-heading { padding-top: 22px; }
-  .exercise-heading h2, .translation h2 { font-size: 19px; }
-  .sentence-count { display: none; }
-  .character-line { padding-top: 27px; }
-  .character-tile { width: 65px; }
-  .hanzi { height: 77px; font-size: 47px; }
-  .character-tile input { font-size: 21px; }
-  .punctuation { padding-top: 72px; font-size: 28px; margin-right: 4px; }
-  .translation p { font-size: 19px; }
-  .translation { padding: 18px 0 0; }
-  .exercise-footer > .text-button { font-size: 14px; }
-  .primary { padding: 9px 15px; }
+  .masthead { display: block; min-height: 0; padding-top: 20px; }
+  .brand { display: flex; gap: 10px; align-items: baseline; }
+  .brand strong { font-size: 28px; }
+  .brand > span { font-size: 14px; margin-top: 0; }
+  .portal-nav { justify-content: space-between; gap: 12px; margin-top: 20px; }
+  .portal-nav button { padding: 0 0 10px; }
+  .nav-copy b { font-size: 14px; }
+  .nav-copy small { font-size: 11px; margin-top: 3px; }
+  .page-tools { min-height: 40px; }
+  .worksheet, .collection-card { padding: 20px 17px 18px; }
+  .worksheet-header h1, .collection-heading h1 { font-size: 22px; }
+  .worksheet-header p, .collection-heading p { font-size: 13px; }
+  .sentence-tools { margin-top: 14px; gap: 5px 10px; }
+  .lesson-meta { font-size: 12px; gap: 8px; }
+  .lesson-meta > span + span { padding-left: 8px; }
+  .lesson-meta small { display: none; }
+  .listen-button { font-size: 12px; }
+  .listen-button > [lang='en'] { font-size: 12px; }
+  .character-line { padding-top: 23px; }
+  .character-tile { width: 72px; }
+  .hanzi { height: 74px; font-size: 44px; }
+  .character-tile input { font-size: 18px; }
+  .character-tile input::placeholder { font-size: 12px; }
+  .punctuation { padding-top: 69px; font-size: 26px; margin-right: 0; }
+  .reveal { font-size: 13px; padding-block: 5px; }
+  #pinyin-shortcuts { font-size: 13px; }
+  #pinyin-shortcuts > span { margin-inline: 4px; }
+  .translation { margin-top: 22px; padding-top: 17px; }
+  .translation p { font-size: 16px; }
+  .exercise-footer { padding-block: 20px; gap: 10px; }
+  .exercise-footer > .text-button { font-size: 13px; }
+  .primary { padding: 9px 12px; font-size: 14px; }
+  .primary > [lang='en'], .text-button > [lang='en'] { font-size: 12px; margin-left: 3px; }
   .result-message { flex-basis: 100%; }
-  .companion-column { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .classroom-picture, .help-panel { grid-column: auto; grid-row: auto; }
-  .panel-title { font-size: 19px; gap: 8px; }
-  .panel-title > span { font-size: 14px; }
-  .stats-table th, .stats-table td { font-size: 14px; padding-block: 9px; }
-  .goal-boxes { gap: 2px; }
-  .goal-boxes > span { height: 14px; }
-  .review-panel > p, .help-panel > p { font-size: 14px; }
-  .review-table, .review-table .text-button { font-size: 14px; }
-  .character-note { align-items: flex-start; gap: 12px; padding: 13px; }
-  .note-character { width: 54px; height: 54px; font-size: 37px; }
-  .collection-card { padding-inline: 18px; }
-  .collection-heading h1 { font-size: 25px; }
-  .settings-panel { padding: 20px; }
+  .character-note { gap: 10px; }
+  .note-character { width: 40px; font-size: 37px; }
+  .character-note h3 { font-size: 14px; }
+  .companion-column { gap: 20px; }
+  .panel-title { gap: 5px; font-size: 14px; }
+  .panel-title > span { font-size: 11px; }
+  .stats-table th, .stats-table td { font-size: 12px; }
+  .today-progress p b { font-size: 32px; }
+  .goal-boxes { gap: 3px; }
+  .settings-panel { padding: 18px; }
   .settings-panel .section-label { align-items: flex-start; }
   .settings-panel .section-label > button { flex-shrink: 0; }
-  .site-footer { font-size: 14px; gap: 8px; }
+  .filters { gap: 10px; }
+  .search { flex-basis: 100%; }
+  .search input { font-size: 16px; }
+  .filters select { width: 100%; font-size: 16px; }
+  .sentence-copy strong { font-size: 24px; }
+  .sentence-row { padding-block: 15px; }
+  .result-count > span { display: block; margin-left: 0; }
+  .site-footer { margin-top: 22px; font-size: 11px; }
 }
 @media (max-width: 360px) {
-  .site-description { display: none; }
-  .nav-copy b { font-size: 16px; }
-  .character-tile { width: 59px; }
-  .hanzi { font-size: 43px; }
+  .worksheet, .collection-card { padding-inline: 13px; }
+  .character-tile { width: 70px; }
+  .hanzi { font-size: 39px; }
+  .companion-column { grid-template-columns: 1fr; }
+  .check-action .primary { padding-inline: 9px; }
 }
