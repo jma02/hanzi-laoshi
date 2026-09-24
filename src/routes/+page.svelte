@@ -50,33 +50,40 @@
   }
 </script>
 
-<svelte:head><title>汉字老师 - 在线拼音练习 | Hanzi Laoshi</title><meta name="description" content="Chinese reading and pinyin practice. 440 sentences, per-character annotations, and adaptive review."/><meta name="theme-color" content="#f3e6d3"/></svelte:head>
+<svelte:head><title>汉字老师 · 每天练一点中文</title><meta name="description" content="每天练一点中文：汉字辨读、拼音练习和日常例句。Chinese reading and pinyin practice with English support."/><meta name="theme-color" content="#f6f1e7"/></svelte:head>
 
 <div class="portal">
   <header class="masthead">
-    <a class="brand" href="/" aria-label="Hanzi Laoshi home"><strong lang="zh">汉字老师</strong><span>Hanzi Laoshi</span></a>
-    <div class="site-description"><span lang="zh">日常汉语 · 每日练习</span><p>A little practice, every day.</p></div>
+    <a class="brand" href="/" aria-label="汉字老师 Hanzi Laoshi home"><strong>汉字老师</strong><span lang="en">Hanzi Laoshi</span></a>
+    <div class="site-description"><span>每天练一点中文</span><p lang="en">A little practice, every day.</p></div>
   </header>
   <nav class="portal-nav" aria-label="Main navigation">
-    {#each [{ id: 'practice', title: 'Practice', chinese: '每日练习' }, { id: 'characters', title: 'Characters', chinese: '我的字库' }, { id: 'sentences', title: 'Sentences', chinese: '例句选读' }] as item}
-      <button class:current={view === item.id} aria-current={view === item.id ? 'page' : undefined} onclick={() => { view = item.id; }}><span class="nav-copy"><b lang="zh">{item.chinese}</b><small>{item.title}</small></span></button>
+    {#each [{ id: 'practice', title: 'Practice', chinese: '练一练' }, { id: 'characters', title: 'Characters', chinese: '我的字库' }, { id: 'sentences', title: 'Sentences', chinese: '日常例句' }] as item}
+      <button class:current={view === item.id} aria-current={view === item.id ? 'page' : undefined} onclick={() => { view = item.id; }}><span class="nav-copy"><b>{item.chinese}</b><small lang="en">{item.title}</small></span></button>
     {/each}
-    <button class:current={settingsOpen} aria-expanded={settingsOpen} onclick={() => { settingsOpen = !settingsOpen; }}><span class="nav-copy"><b lang="zh">练习设置</b><small>Settings</small></span></button>
+    <button class:current={settingsOpen} aria-expanded={settingsOpen} onclick={() => { settingsOpen = !settingsOpen; }}><span class="nav-copy"><b>设置</b><small lang="en">Settings</small></span></button>
   </nav>
   <main>
-    <div class="location-bar"><span>练习簿 / <b>{view === 'practice' ? '每日练习' : view === 'characters' ? '我的字库' : '例句选读'}</b></span><div class="script-toggle" aria-label="Character script"><button class:selected={!settings.traditional} aria-pressed={!settings.traditional} onclick={() => { settings.traditional = false; }}>简体 Simplified</button><button class:selected={settings.traditional} aria-pressed={settings.traditional} onclick={() => { settings.traditional = true; }}>繁體 Traditional</button></div></div>
-    {#if storageMessage}<p class="notice" role="status">{storageMessage}</p>{/if}
-    {#if settingsOpen}<section class="settings-panel"><div class="section-label"><h2>练习设置 / Settings</h2><button class="text-button" aria-label="Close settings" onclick={() => { settingsOpen = false; }}>关闭 Close ×</button></div><label><input type="checkbox" bind:checked={settings.translation}/> 显示英文 / Show English translation by default</label><label><input type="checkbox" bind:checked={settings.strict}/> 声调检查 / Require tone marks or numbers</label><p class="small muted">Progress is stored in this browser. A reading is mastered after three consecutive correct pinyin answers.</p></section>{/if}
+    <div class="location-bar"><span>汉字与拼音 <span aria-hidden="true">·</span> <b>{view === 'practice' ? '每日练习' : view === 'characters' ? '学习记录' : '读懂生活里的中文'}</b></span><div class="script-toggle" aria-label="Character script"><button class:selected={!settings.traditional} aria-pressed={!settings.traditional} onclick={() => { settings.traditional = false; }}>简体 <span lang="en">Simplified</span></button><button class:selected={settings.traditional} aria-pressed={settings.traditional} onclick={() => { settings.traditional = true; }}>繁體 <span lang="en">Traditional</span></button></div></div>
+    {#if storageMessage}<p class="notice" role="status" lang="en">{storageMessage}</p>{/if}
+    {#if settingsOpen}
+      <section class="settings-panel">
+        <div class="section-label"><h2>练习设置 <small lang="en">Settings</small></h2><button class="text-button" aria-label="Close settings" onclick={() => { settingsOpen = false; }}>关闭 ×</button></div>
+        <label><input type="checkbox" bind:checked={settings.translation}/><span>默认显示英文释义<small class="supporting" lang="en">Show English translations by default</small></span></label>
+        <label><input type="checkbox" bind:checked={settings.strict}/><span>检查声调<small class="supporting" lang="en">Require tone marks or numbers, such as nǐ or ni3</small></span></label>
+        <p class="small muted">同一字音连续答对三次，记为已掌握。进度保存在当前浏览器。<span class="supporting" lang="en">Three consecutive correct pinyin answers master a reading. Progress stays in this browser.</span></p>
+      </section>
+    {/if}
     <div class="learning-layout">
       <div class="main-column">
         {#if view === 'practice'}
-          <div class="practice-tabs"><strong>温习 / Review</strong><span>{focus ? `重点字：${focus}` : progress.recent.length ? 'A little review, a little progress.' : 'Your first sentence. Take your time.'}</span>{#if focus}<button class="text-button" onclick={() => startPractice()}>取消 Clear</button>{/if}</div>
+          <div class="practice-tabs"><strong>{focus ? `重点复习：${focus}` : '今天练一练'}</strong><span>{progress.recent.length ? '接着上次，继续练习。' : '从这一句开始，慢慢来。'}</span>{#if focus}<button class="text-button" onclick={() => startPractice()}>取消重点复习 <span lang="en">Clear</span></button>{/if}</div>
           {#key round}<Practice {sentence} bind:progress {settings} {focus} onnext={() => startPractice(undefined, focus)}/>{/key}
-          <div class="practice-bottom"><span>词句来自日常生活 / Everyday Chinese</span><button class="text-button" onclick={() => startPractice(undefined, focus)}>换一道题 / Skip sentence »</button></div>
+          <div class="practice-bottom"><span>学的每一句，生活里都用得上。</span><button class="text-button" onclick={() => startPractice(undefined, focus)}>换一句 <span lang="en">Skip</span></button></div>
         {:else}<Collection {view} {progress} useTraditional={settings.traditional} onpractice={startPractice}/>{/if}
       </div>
       <Companion {progress} {level} {streak} {mastered} onfocus={char => startPractice(undefined, char)}/>
     </div>
-    <footer class="site-footer"><span lang="zh">汉字老师 · 读写练习簿</span><span>{sentences.length} sentences · {totalCharacters} characters</span><span>{storageMessage ? 'Progress not saved' : 'Progress saved in this browser'}</span></footer>
+    <footer class="site-footer"><span>汉字老师 · 每天练一点中文</span><span>{sentences.length} 个日常例句 · {totalCharacters} 个汉字</span><span>{storageMessage ? '进度未保存' : '进度已保存在本机'}</span></footer>
   </main>
 </div>

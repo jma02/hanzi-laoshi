@@ -39,8 +39,8 @@
   }
 </script>
 <div class="audio-tools">
-  <button class="listen-button" onclick={play} disabled={!ready} aria-label={playing ? 'Stop sentence audio' : 'Listen to sentence'}><Icon name="volume" size={18}/>{playing ? '停止 Stop' : '朗读 Listen'}</button>
+  <button class="listen-button" onclick={play} disabled={!ready} aria-label={playing ? 'Stop sentence audio' : 'Listen to sentence'}><Icon name="volume" size={18}/>{playing ? '停止' : '听一遍'} <span lang="en">{playing ? 'Stop' : 'Listen'}</span></button>
   <button class="speed-button" aria-label="Slow audio" aria-pressed={slow} onclick={() => { slow = !slow; if (audio) audio.playbackRate = slow ? 0.8 : 1; }}>{slow ? '0.8×' : '1×'}</button>
-  <span class="audio-label">{premium ? 'Cartesia · Mandarin' : 'Device voice · quality varies'}</span>
+  <span class="audio-label">{premium ? '普通话朗读' : '设备语音，音质因设备而异'}</span>
 </div>
 {#if message}<p class="notice" role="status">{message}</p>{/if}
