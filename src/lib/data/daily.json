@@ -65,7 +65,7 @@
   {"id": "daily-064", "category": "Food", "level": 1, "hanzi": "这个苹果很甜。", "pinyin": ["zhe4", "ge5", "ping2", "guo3", "hen3", "tian2"], "english": "This apple is very sweet."},
   {"id": "daily-065", "category": "Food", "level": 1, "hanzi": "香蕉还没有熟。", "pinyin": ["xiang1", "jiao1", "hai2", "mei2", "you3", "shu2"], "english": "The bananas aren't ripe yet."},
   {"id": "daily-066", "category": "Food", "level": 1, "hanzi": "先洗手再吃饭。", "pinyin": ["xian1", "xi3", "shou3", "zai4", "chi1", "fan4"], "english": "Wash your hands before eating."},
-  {"id": "daily-067", "category": "Food", "level": 1, "hanzi": "饭已经做好了。", "pinyin": ["fan4", "yi3", "jing1", "zuo4", "hao3", "le5"], "english": "The meal is ready."},
+  {"id": "daily-067", "category": "Food", "level": 1, "hanzi": "饭已经做好了。", "pinyin": ["fan4", "yi3", "jing1", "zuo4", "hao3", "le5"], "english": "The food is already ready."},
   {"id": "daily-068", "category": "Food", "level": 1, "hanzi": "大家快来吃饭。", "pinyin": ["da4", "jia1", "kuai4", "lai2", "chi1", "fan4"], "english": "Everyone, come and eat."},
   {"id": "daily-069", "category": "Food", "level": 1, "hanzi": "你还要一点吗？", "pinyin": ["ni3", "hai2", "yao4", "yi1", "dian3", "ma5"], "english": "Would you like a little more?"},
   {"id": "daily-070", "category": "Food", "level": 1, "hanzi": "我已经吃饱了。", "pinyin": ["wo3", "yi3", "jing1", "chi1", "bao3", "le5"], "english": "I'm already full."},
