@@ -2,7 +2,7 @@
 
 A SvelteKit reading trainer for everyday Mandarin. Annotate individual characters, uncover their pinyin, and let the sentences adapt to the characters you miss.
 
-The interface draws on a Chinese school exercise book: Kai-style Chinese type, pinyin ruling above character grids, green notebook headings, and red teacher markings. An original classroom illustration sits beside the lesson. Soft, proportional Alegreya Sans is used for pinyin and English controls; longer English translations use a system serif.
+The practice page follows the layout of a Chinese pinyin worksheet: a centered lesson heading, numbered rust-red instructions, four-line pinyin bands above unboxed Kai-style characters, and a small character-notes grid. Progress sits in the page margin. Soft, proportional Alegreya Sans is used for pinyin and English controls; longer English translations use a system serif. Layout reference: [a first-grade pinyin workbook interior](https://tao.hooos.com/goods_655544120283.html). No source illustrations or exercise content were copied.
 
 The web fonts are self-hosted under `static/fonts/` with their OFL licenses. `hanzi-classroom.woff` is a renamed web subset of [LXGW WenKai](https://github.com/lxgw/LxgwWenKai), covering the current sentence bank, its traditional forms, and interface text; unsupported characters fall back to system Kai/Song fonts. `hanzi-text-*.woff` are renamed Latin subsets of [Alegreya Sans](https://github.com/huertatipografica/Alegreya-Sans), including every Mandarin pinyin tone mark. The original classroom illustration was generated for this project.
 

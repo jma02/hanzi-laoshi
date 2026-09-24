@@ -66,9 +66,10 @@
   }
 </script>
 
+<article class="worksheet">
 <section class="practice-card" class:finished={submitted}>
-  <div class="card-top"><div class="lesson-label"><h1 lang="zh">看汉字，写拼音</h1></div><span class="topic-pill">{sentence.category} <span>·</span> {sentence.level === 1 ? 'Beginner' : sentence.level === 2 ? 'Growing' : 'Stretch'}</span></div>
-  <div class="exercise-heading"><p>Write the pinyin above each character.</p><span class:complete={submitted}>{submitted ? '已批改 · Checked' : sentence.id}</span></div>
+  <header class="worksheet-header"><h1 lang="zh">汉语读写练习</h1><p>Chinese reading &amp; pinyin</p><div class="lesson-meta"><span>{sentence.category} · {sentence.level === 1 ? 'Beginner' : sentence.level === 2 ? 'Growing' : 'Stretch'}</span><span class:complete={submitted}>{submitted ? '已批改 · Checked' : sentence.id}</span></div></header>
+  <div class="exercise-heading"><h2 lang="zh">一、看汉字，写拼音。</h2><p>Write the pinyin above each character.</p></div>
   <div class="sentence-tools"><AudioPlayer {sentence}/><span class="sentence-count">{answerCount} characters</span></div>
   {#if focus}<div class="focus-note"><Icon name="repeat" size={15}/> 重点复习 / Focus character: <strong lang="zh">{focus}</strong></div>{/if}
   <form onsubmit={event => { event.preventDefault(); check(); }}>
@@ -107,7 +108,7 @@
     </div>
     <p id="pinyin-shortcuts" class="small muted">Tab next · Shift+Tab back · Backspace on empty: back · ? reveal &amp; move on</p>
     <span class="sr-only" aria-live="polite">{announcement}</span>
-    <div class="translation"><span class="eyebrow"><span lang="zh">这句话的意思</span><span> / Meaning</span></span>{#if showTranslation}<p>{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> 显示译文 / Show English</button>{/if}</div>
+    <div class="translation"><h2 lang="zh">二、读一读，想一想。</h2><span class="meaning-label">What does the sentence mean?</span>{#if showTranslation}<p>{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> 显示译文 / Show English</button>{/if}</div>
     <div class="exercise-footer">
       {#if submitted}<div class="result-message" aria-live="polite"><span class="result-icon"><Icon name="check"/></span><div><strong>{correct === answerCount ? '全部正确 / All correct' : '已批改 / Answers checked'}</strong><span>{correct}/{answerCount} pinyin correct · +{earned} XP{Object.values(results).includes('recognition') ? ' · ◉ character recognized; tone untested' : ''}</span></div></div><button type="button" class="primary" onclick={onnext}>下一题 / Next »</button>
       {:else}<button type="button" class="text-button muted" onclick={() => { for (const token of characters.filter(t => t.pinyin)) reveal(token.position); }}>显示答案 / Reveal all</button><div class="check-action" class:incomplete={incompleteWarning}><span>{filled} / {answerCount} annotated</span><button bind:this={checkButton} class="primary" class:warning={incompleteWarning} type="submit" aria-describedby={incompleteWarning ? 'incomplete-note' : undefined} onkeydown={event => { if (event.repeat && (event.key === 'Enter' || event.key === ' ')) event.preventDefault(); }}>{incompleteWarning ? incompleteLabel : '检查 / Check'}</button>{#if incompleteWarning}<small id="incomplete-note">Unlabeled characters will count as missed.</small>{/if}</div>{/if}
@@ -118,3 +119,4 @@
   <section class="character-note"><div class="note-character" lang="zh">{active?.display || '字'}</div><div><span class="eyebrow">单字笔记 / Character notes</span><h3>{active?.char ? ((glosses as Record<string,string>)[active.char] || 'Meaning depends on context') : 'Select a character'}</h3>{#if active?.pinyin && results[selected]}<p>{toneMark(active.pinyin)} <span>· meaning changes with context</span></p>{:else}<p>Click a character to see its meaning. Reveal to check pronunciation.</p>{/if}</div></section>
   <details class="input-help"><summary>输入帮助 / Pinyin &amp; tone rules</summary><p>Type <b>nǐ</b>, <b>ni3</b>, or <b>ni</b>. Use <b>ü</b>, <b>v</b>, or <b>u:</b>. <b>Tab</b> or Space moves to the next character; <b>Shift+Tab</b> moves back. Press <b>Backspace</b> in an empty box to return to the previous editable character. Type <b>?</b> to reveal the focused character and move on. Chinese keyboards work too: commit one character per box.</p><p>Character input practices recognition; it does not test tones. Reveals count as a character to review. We show dictionary tones; 一, 不, third tones, and 儿 can sound different in natural speech.</p></details>
 </div>
+</article>

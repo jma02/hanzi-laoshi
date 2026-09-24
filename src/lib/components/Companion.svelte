@@ -8,7 +8,6 @@
   $: weak = Object.entries(progress.characters).filter(([, s]) => s.missed && s.run < 3).sort(([, a], [, b]) => (b.missed / (b.correct + b.missed)) - (a.missed / (a.correct + a.missed))).slice(0, 4);
 </script>
 <aside class="companion-column">
-  <figure class="classroom-picture"><img src="/classroom-afternoon.webp" alt="Afternoon light through open classroom windows, falling on a wooden desk and an exercise book" width="600" height="400"/></figure>
   <section class="stats-panel">
     <h2 class="panel-title">学习记录 <span>Progress</span></h2>
     <table class="stats-table"><tbody>
@@ -24,9 +23,10 @@
     <h2 class="panel-title">再读一遍 <span>Review</span></h2>
     {#if weak.length}<table class="review-table"><thead><tr><th>汉字</th><th>Pinyin</th><th>练习</th></tr></thead><tbody>{#each weak as [key]}<tr><td lang="zh">{key.split(':')[0]}</td><td>{toneMark(key.split(':')[1])}</td><td><button class="text-button" onclick={() => onfocus(key.split(':')[0])} aria-label={`Practice ${key.split(':')[0]}`}>复习 »</button></td></tr>{/each}</tbody></table><p>These characters appear more often in practice.</p>{:else}<p>暂无记录 / No mistakes recorded.</p><p>Missed or revealed characters appear here for review.</p>{/if}
   </section>
-  <section class="help-panel">
-    <h2 class="panel-title">使用说明 <span>Keyboard</span></h2>
+  <figure class="classroom-picture"><img src="/classroom-afternoon.webp" alt="Afternoon light through open classroom windows, falling on a wooden desk and an exercise book" width="600" height="400"/></figure>
+  <details class="help-panel">
+    <summary>使用说明 <span>Keyboard</span></summary>
     <dl><dt>Tab / Space</dt><dd>下一字 / Next character</dd><dt>Shift + Tab</dt><dd>上一字 / Previous</dd><dt>Backspace</dt><dd>空白时返回 / Back if empty</dd><dt>?</dt><dd>显示答案 / Reveal &amp; next</dd></dl>
     <p>拼音示例 / Pinyin: <b>nǐ · ni3 · ni</b><br/>ü = v = u:　·　Chinese IME supported</p>
-  </section>
+  </details>
 </aside>

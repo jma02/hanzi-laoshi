@@ -50,18 +50,18 @@
   }
 </script>
 
-<svelte:head><title>汉字老师 - 在线拼音练习 | Hanzi Laoshi</title><meta name="description" content="Chinese reading and pinyin practice. 440 sentences, per-character annotations, and adaptive review."/><meta name="theme-color" content="#315849"/></svelte:head>
+<svelte:head><title>汉字老师 - 在线拼音练习 | Hanzi Laoshi</title><meta name="description" content="Chinese reading and pinyin practice. 440 sentences, per-character annotations, and adaptive review."/><meta name="theme-color" content="#f1f0eb"/></svelte:head>
 
 <div class="portal">
   <header class="masthead">
-    <a class="brand" href="/" aria-label="Hanzi Laoshi home"><span class="brand-kicker" lang="zh">日常汉语 · 读写练习</span><strong lang="zh">汉字老师</strong><span>Hanzi Laoshi</span></a>
-    <div class="site-description"><b lang="zh">读 写 练 习 簿</b><p>Chinese reading practice</p><span><b>{sentences.length}</b> 例句　 /　 <b>{totalCharacters}</b> 汉字</span></div>
+    <a class="brand" href="/" aria-label="Hanzi Laoshi home"><strong lang="zh">汉字老师</strong><span>Hanzi Laoshi</span></a>
+    <div class="site-description"><span lang="zh">日常汉语 · 每日练习</span><p>Chinese reading practice</p></div>
   </header>
   <nav class="portal-nav" aria-label="Main navigation">
-    {#each [{ id: 'practice', title: 'Practice', chinese: '每日练习' }, { id: 'characters', title: 'Characters', chinese: '我的字库' }, { id: 'sentences', title: 'Sentences', chinese: '例句选读' }] as item, index}
-      <button class:current={view === item.id} aria-current={view === item.id ? 'page' : undefined} onclick={() => { view = item.id; }}><span class="nav-number">0{index + 1}</span><span class="nav-copy"><b lang="zh">{item.chinese}</b><small>{item.title}</small></span></button>
+    {#each [{ id: 'practice', title: 'Practice', chinese: '每日练习' }, { id: 'characters', title: 'Characters', chinese: '我的字库' }, { id: 'sentences', title: 'Sentences', chinese: '例句选读' }] as item}
+      <button class:current={view === item.id} aria-current={view === item.id ? 'page' : undefined} onclick={() => { view = item.id; }}><span class="nav-copy"><b lang="zh">{item.chinese}</b><small>{item.title}</small></span></button>
     {/each}
-    <button class:current={settingsOpen} aria-expanded={settingsOpen} onclick={() => { settingsOpen = !settingsOpen; }}><span class="nav-number">04</span><span class="nav-copy"><b lang="zh">练习设置</b><small>Settings</small></span></button>
+    <button class:current={settingsOpen} aria-expanded={settingsOpen} onclick={() => { settingsOpen = !settingsOpen; }}><span class="nav-copy"><b lang="zh">练习设置</b><small>Settings</small></span></button>
   </nav>
   <main>
     <div class="location-bar"><span>练习簿 / <b>{view === 'practice' ? '每日练习' : view === 'characters' ? '我的字库' : '例句选读'}</b></span><div class="script-toggle" aria-label="Character script"><button class:selected={!settings.traditional} aria-pressed={!settings.traditional} onclick={() => { settings.traditional = false; }}>简体 Simplified</button><span>|</span><button class:selected={settings.traditional} aria-pressed={settings.traditional} onclick={() => { settings.traditional = true; }}>繁體 Traditional</button></div></div>
