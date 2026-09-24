@@ -43,6 +43,10 @@
 .exercise-footer { padding: 16px 0; border-top: 1px solid #c6cdb8; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 .check-action { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
 .check-action > span { font-size: 12px; color: #81846e; }
+.check-action.incomplete { display: grid; justify-items: end; flex: 1 1 280px; min-width: 0; }
+.check-action .warning { max-width: 100%; background: var(--red); border-color: var(--red); white-space: normal; }
+.check-action .warning:hover { background: #862b21; }
+#incomplete-note { font-size: 12px; color: var(--red); text-align: right; }
 .result-message { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--red); }
 .result-message div > span { display: block; margin-top: 4px; font-size: 12px; color: #747b65; }
 .result-icon { display: flex; }

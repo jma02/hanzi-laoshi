@@ -12,7 +12,7 @@ test('accepts tone marks, numbers, neutral tones, and keyboard alternatives', ()
   assert.ok(gradePinyin('de0 ', 'de5', true));
   assert.ok(gradePinyin('ni', 'ni3', false));
   assert.equal(gradePinyin('ni', 'ni3', true), false);
-  for (const input of ['ni2', 'nǐ4', 'ni33', 'nǐǐ', 'n i3', '你']) assert.equal(gradePinyin(input, 'ni3', false), false);
+  for (const input of ['', '   ', 'ni2', 'nǐ4', 'ni33', 'nǐǐ', 'n i3', '你']) assert.equal(gradePinyin(input, 'ni3', false), false);
   assert.equal(toneMark('xue2'), 'xué'); assert.equal(toneMark('shui3'), 'shuǐ'); assert.equal(toneMark('liu2'), 'liú');
 });
 
