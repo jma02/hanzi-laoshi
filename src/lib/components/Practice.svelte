@@ -6,6 +6,7 @@
   import glosses from '$lib/data/glosses.json';
   import Icon from './Icon.svelte';
   import AudioPlayer from './AudioPlayer.svelte';
+  import CozySprite from './CozySprite.svelte';
   export let sentence: Sentence;
   export let progress: Progress;
   export let settings: Settings;
@@ -68,7 +69,7 @@
 
 <article class="worksheet">
 <section class="practice-card" class:finished={submitted}>
-  <header class="worksheet-header"><h1 lang="zh">汉语读写练习</h1><p>Chinese reading &amp; pinyin</p><div class="lesson-meta"><span>{sentence.category} · {sentence.level === 1 ? 'Beginner' : sentence.level === 2 ? 'Growing' : 'Stretch'}</span><span class:complete={submitted}>{submitted ? '已批改 · Checked' : sentence.id}</span></div></header>
+  <header class="worksheet-header"><div class="lesson-welcome"><Icon name="leaf" size={15}/><span>One character at a time</span></div><div class="lesson-heading"><CozySprite kind="tea"/><div><h1 lang="zh">汉语读写练习</h1><p>Chinese reading &amp; pinyin</p></div></div><div class="lesson-meta"><span>{sentence.category} · {sentence.level === 1 ? 'Beginner' : sentence.level === 2 ? 'Growing' : 'Stretch'}</span><span class:complete={submitted}>{submitted ? '已批改 · Checked' : sentence.id}</span></div></header>
   <div class="exercise-heading"><h2 lang="zh">一、看汉字，写拼音。</h2><p>Write the pinyin above each character.</p></div>
   <div class="sentence-tools"><AudioPlayer {sentence}/><span class="sentence-count">{answerCount} characters</span></div>
   {#if focus}<div class="focus-note"><Icon name="repeat" size={15}/> 重点复习 / Focus character: <strong lang="zh">{focus}</strong></div>{/if}

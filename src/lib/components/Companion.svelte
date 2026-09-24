@@ -1,6 +1,7 @@
 <script lang="ts">
   import { dateKey, type Progress } from '$lib/progress';
   import { toneMark } from '$lib/pinyin';
+  import CozySprite from './CozySprite.svelte';
   export let progress: Progress;
   export let level: number, streak: number, mastered: number;
   export let onfocus: (char: string) => void;
@@ -18,6 +19,7 @@
       <tr><th>今日 Today</th><td><b>{today}</b> / 10 sentences</td></tr>
     </tbody></table>
     <div class="daily-goal"><div class="goal-boxes" role="progressbar" aria-label="Daily sentence goal" aria-valuenow={Math.min(today, 10)} aria-valuemin="0" aria-valuemax="10">{#each Array(10) as _, index}<span class:done={index < today} aria-hidden="true"></span>{/each}</div><p>{today >= 10 ? '今日目标已完成 / Daily goal complete' : `距目标还差 ${10 - today} 句 / ${10 - today} to go`}</p></div>
+    <div class="growth-note"><CozySprite kind="sprout"/><p>{today >= 10 ? 'A lovely day of learning.' : 'Little by little, you grow.'}</p></div>
   </section>
   <section class="review-panel">
     <h2 class="panel-title">再读一遍 <span>Review</span></h2>
