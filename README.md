@@ -2,9 +2,9 @@
 
 A SvelteKit reading trainer for everyday Mandarin. Annotate individual characters, uncover their pinyin, and let the sentences adapt to the characters you miss.
 
-The interface draws on a Chinese school exercise book: Kai-style Chinese type, pinyin ruling above character grids, green notebook headings, and red teacher markings. An original classroom illustration sits beside the lesson. IBM Plex Mono is used for pinyin and English controls; longer English translations use a system serif.
+The interface draws on a Chinese school exercise book: Kai-style Chinese type, pinyin ruling above character grids, green notebook headings, and red teacher markings. An original classroom illustration sits beside the lesson. Soft, proportional Alegreya Sans is used for pinyin and English controls; longer English translations use a system serif.
 
-Both web fonts are self-hosted under `static/fonts/` with their OFL licenses. `hanzi-classroom.woff` is a renamed web subset of [LXGW WenKai](https://github.com/lxgw/LxgwWenKai), covering the current sentence bank, its traditional forms, and interface text; unsupported characters fall back to system Kai/Song fonts. The original classroom illustration was generated for this project.
+The web fonts are self-hosted under `static/fonts/` with their OFL licenses. `hanzi-classroom.woff` is a renamed web subset of [LXGW WenKai](https://github.com/lxgw/LxgwWenKai), covering the current sentence bank, its traditional forms, and interface text; unsupported characters fall back to system Kai/Song fonts. `hanzi-text-*.woff` are renamed Latin subsets of [Alegreya Sans](https://github.com/huertatipografica/Alegreya-Sans), including every Mandarin pinyin tone mark. The original classroom illustration was generated for this project.
 
 ## Run
 

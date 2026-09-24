@@ -1,28 +1,28 @@
-.companion-column { display: grid; gap: 23px; padding-top: 31px; }
-.classroom-picture { margin: 0; border: 1px solid #b8c2ad; padding: 5px; background: #fffdf4; }
+.companion-column { display: grid; gap: 23px; padding-top: 35px; }
+.classroom-picture { margin: 0; border: 1px solid #b8c2ad; padding: 6px; background: #fffdf4; border-radius: 3px; box-shadow: 0 3px 8px #34452c0c; }
 .classroom-picture img { display: block; width: 100%; height: auto; }
-.stats-panel { padding: 16px 17px; background: #315849; color: #f2f1df; border: 3px double #738e72; }
+.stats-panel { padding: 16px 17px; background: #315849; color: #f2f1df; border: 1px solid #315849; border-radius: 4px; }
 .panel-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; padding: 0 0 11px; font: 24px var(--song); border-bottom: 1px solid #b8c3ac; }
-.panel-title > span { font: 12px var(--latin); color: #7d886e; }
+.panel-title > span { font: 15px var(--latin); color: var(--muted); }
 .stats-panel .panel-title { border-color: #6d866c; }
 .stats-panel .panel-title > span { color: #c4d0b5; }
 .stats-table, .review-table { border-collapse: collapse; width: 100%; font-size: 14px; }
-.stats-table th, .stats-table td { border-bottom: 1px solid #5a7760; padding: 9px 0; text-align: left; font-weight: normal; }
-.stats-table th { font-size: 12px; color: #c9d3bc; }
-.stats-table td { text-align: right; font-size: 13px; }
+.stats-table th, .stats-table td { border-bottom: 1px solid #f2f1df26; padding: 9px 0; text-align: left; font-weight: normal; }
+.stats-table th { font-size: 14px; color: #c9d3bc; }
+.stats-table td { text-align: right; font-size: 16px; font-variant-numeric: tabular-nums; }
 .stats-table .score { color: #f0ce8b; }
 .daily-goal { padding-top: 16px; }
 .goal-boxes { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
 .goal-boxes > span { height: 13px; background: #456855; border: 1px solid #9aab89; }
 .goal-boxes .done { background: #deca90; border-color: #deca90; }
-.daily-goal p { font-size: 12px; color: #c1ceb3; margin-top: 9px; }
+.daily-goal p { font-size: 14px; color: #c1ceb3; margin-top: 9px; }
 .review-panel, .help-panel { padding: 0 5px; }
-.review-table th { font-size: 12px; padding: 7px 3px; color: #848974; font-weight: normal; }
+.review-table th { font-size: 14px; padding: 9px 3px; color: var(--muted); font-weight: normal; }
 .review-table td { padding: 7px 3px; border-bottom: 1px solid #d4d8c6; text-align: center; }
 .review-table td[lang] { font-size: 30px; color: #405c43; }
-.review-panel > p, .help-panel > p { padding-top: 12px; font-size: 12px; color: #7b826c; }
+.review-panel > p, .help-panel > p { padding-top: 12px; font-size: 15px; color: var(--muted); }
 .review-panel > p + p { padding-top: 6px; }
-.help-panel dl { margin: 0; padding-top: 12px; font-size: 12px; }
+.help-panel dl { margin: 0; padding-top: 12px; font-size: 15px; }
 .help-panel dt { margin-top: 10px; color: #596c51; }
 .help-panel dt:first-child { margin-top: 0; }
-.help-panel dd { margin: 3px 0 0; color: #858772; }
+.help-panel dd { margin: 3px 0 0; color: var(--muted); }

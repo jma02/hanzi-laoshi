@@ -54,7 +54,7 @@
 
 <div class="portal">
   <header class="masthead">
-    <a class="brand" href="/" aria-label="Hanzi Laoshi home"><span class="brand-kicker" lang="zh">日常汉语 · 读写练习</span><strong lang="zh">汉字老师</strong><span>HANZI LAOSHI</span></a>
+    <a class="brand" href="/" aria-label="Hanzi Laoshi home"><span class="brand-kicker" lang="zh">日常汉语 · 读写练习</span><strong lang="zh">汉字老师</strong><span>Hanzi Laoshi</span></a>
     <div class="site-description"><b lang="zh">读 写 练 习 簿</b><p>Chinese reading practice</p><span><b>{sentences.length}</b> 例句　 /　 <b>{totalCharacters}</b> 汉字</span></div>
   </header>
   <nav class="portal-nav" aria-label="Main navigation">

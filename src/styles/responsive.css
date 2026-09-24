@@ -25,10 +25,10 @@
   .nav-number { display: none; }
   .portal-nav button { padding-block: 11px; }
   .nav-copy b { font-size: 22px; letter-spacing: 0; }
-  .nav-copy small { font-size: 12px; }
+  .nav-copy small { font-size: 14px; }
   .site-description > b { font-size: 20px; letter-spacing: 1px; }
-  .site-description p { max-width: 175px; font-size: 12px; }
-  .site-description > span { font-size: 12px; }
+  .site-description p { max-width: 175px; font-size: 14px; }
+  .site-description > span { font-size: 14px; }
   .character-tile { width: 76px; }
   .hanzi { height: 76px; font-size: 51px; }
   .row-topic { display: none; }
@@ -38,45 +38,45 @@
   .masthead { gap: 10px; padding-block: 21px; }
   .brand strong { font-size: 40px; letter-spacing: 4px; }
   .brand .brand-kicker { font-size: 14px; letter-spacing: 2px; }
-  .brand > span { font-size: 12px; letter-spacing: 3px; }
+  .brand > span { font-size: 16px; letter-spacing: .06em; }
   .site-description { max-width: 125px; }
   .site-description > b { font-size: 19px; letter-spacing: 0; }
-  .site-description > p { font-size: 12px; line-height: 1.5; }
+  .site-description > p { font-size: 14px; line-height: 1.5; }
   .site-description > span { display: none; }
   .nav-copy b { font-size: 20px; }
-  .nav-copy small { font-size: 12px; }
+  .nav-copy small { font-size: 14px; }
   .location-bar { padding-block: 13px; gap: 7px; }
   .location-bar > span { display: none; }
-  .script-toggle { margin-left: auto; font-size: 12px; }
-  .script-toggle button { font-size: 12px; }
-  .practice-tabs { font-size: 12px; gap: 6px; }
-  .practice-tabs > span { margin-left: auto; font-size: 12px; }
+  .script-toggle { margin-left: auto; font-size: 14px; }
+  .script-toggle button { font-size: 14px; }
+  .practice-tabs { font-size: 14px; gap: 6px; }
+  .practice-tabs > span { margin-left: auto; font-size: 14px; }
   .practice-card { padding-inline: 14px; }
   .card-top { padding-top: 16px; }
   .lesson-label h1 { font-size: 27px; }
-  .exercise-heading { font-size: 12px; }
-  .exercise-heading > span { font-size: 12px; }
+  .exercise-heading { font-size: 15px; }
+  .exercise-heading > span { font-size: 14px; }
   .character-line { gap: 7px; padding-top: 23px; }
   .character-tile { width: 65px; }
   .hanzi { height: 65px; font-size: 44px; }
   .punctuation { padding-top: 59px; font-size: 28px; }
-  .character-tile input { font-size: 16px; }
+  .character-tile input { font-size: 20px; }
   .translation p { font-size: 19px; }
-  .exercise-footer > .text-button { font-size: 12px; }
+  .exercise-footer > .text-button { font-size: 14px; }
   .primary { padding: 9px 14px; }
   .result-message { flex-basis: 100%; }
   .companion-column { gap: 15px; }
   .stats-panel { padding: 12px 9px; }
   .panel-title { font-size: 23px; gap: 4px; }
-  .panel-title > span { font-size: 12px; }
-  .stats-table th, .stats-table td { font-size: 12px; padding-block: 8px; }
-  .daily-goal p { font-size: 12px; line-height: 1.8; }
-  .review-panel > p, .help-panel > p { font-size: 12px; }
-  .review-table { font-size: 12px; }
-  .review-table .text-button { font-size: 12px; }
+  .panel-title > span { font-size: 14px; }
+  .stats-table th, .stats-table td { font-size: 14px; padding-block: 8px; }
+  .daily-goal p { font-size: 14px; line-height: 1.8; }
+  .review-panel > p, .help-panel > p { font-size: 14px; }
+  .review-table { font-size: 15px; }
+  .review-table .text-button { font-size: 14px; }
   .collection-card { padding-inline: 13px; }
   .collection-heading h1 { font-size: 25px; }
-  .site-footer { font-size: 12px; gap: 8px; }
+  .site-footer { font-size: 14px; gap: 8px; }
 }
 @media (max-width: 360px) {
   .portal-nav { grid-template-columns: repeat(2, 1fr); }
@@ -84,5 +84,5 @@
   .character-tile { width: 62px; }
   .hanzi { height: 62px; }
   .nav-copy b { font-size: 18px; }
-  .nav-copy small { font-size: 12px; }
+  .nav-copy small { font-size: 14px; }
 }
