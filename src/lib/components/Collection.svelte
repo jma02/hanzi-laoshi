@@ -12,7 +12,7 @@
   let limit = 30;
 </script>
 <section class="collection-card">
-  <div class="collection-heading"><h1>{view === 'characters' ? '我的字库 / Character bank' : '例句查询 / Sentence database'}</h1><span>{view === 'characters' ? characterRows.length : sentences.length} {view === 'characters' ? 'readings' : 'sentences'}</span></div>
+  <div class="collection-heading"><h1>{view === 'characters' ? '我的字库 / Character bank' : '例句选读 / Sentences'}</h1><span>{view === 'characters' ? characterRows.length : sentences.length} {view === 'characters' ? 'readings' : 'sentences'}</span></div>
   <div class="filters"><label class="search">查询 / Search <input aria-label={view === 'characters' ? 'Search characters' : 'Search sentences'} placeholder={view === 'characters' ? '汉字 / pinyin' : '中文 / English'} bind:value={query} oninput={() => { limit = 30; }}/></label>{#if view !== 'characters'}<select aria-label="Sentence topic" bind:value={category} onchange={() => { limit = 30; }}><option>All topics</option>{#each categories as topic}<option>{topic}</option>{/each}</select>{/if}</div>
   {#if view === 'characters'}
     {#if !characterRows.length}<div class="empty-state"><h2>暂无学习记录 / No characters yet</h2><p>Complete a sentence to record your results here.</p><button class="primary" onclick={() => onpractice()}>开始练习 / Start practice</button></div>

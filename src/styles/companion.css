@@ -1,23 +1,28 @@
-.companion-column { display: grid; gap: 14px; }
-.stats-panel, .review-panel, .help-panel { border: 1px solid #9db4d0; background: #fff; }
-.panel-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; padding: 9px 10px; color: #164782; border-bottom: 1px solid #adc2db; background: #edf3fb; font-size: 16px; }
-.panel-title > span { font: 12px var(--latin); color: #52677f; }
+.companion-column { display: grid; gap: 23px; padding-top: 31px; }
+.classroom-picture { margin: 0; border: 1px solid #b8c2ad; padding: 5px; background: #fffdf4; }
+.classroom-picture img { display: block; width: 100%; height: auto; }
+.stats-panel { padding: 16px 17px; background: #315849; color: #f2f1df; border: 3px double #738e72; }
+.panel-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; padding: 0 0 11px; font: 24px var(--song); border-bottom: 1px solid #b8c3ac; }
+.panel-title > span { font: 12px var(--latin); color: #7d886e; }
+.stats-panel .panel-title { border-color: #6d866c; }
+.stats-panel .panel-title > span { color: #c4d0b5; }
 .stats-table, .review-table { border-collapse: collapse; width: 100%; font-size: 14px; }
-.stats-table th, .stats-table td { border-bottom: 1px solid #d8e0ec; padding: 8px; text-align: left; font-weight: normal; }
-.stats-table th { background: #f6f8fb; font-size: 12px; }
-.stats-table .score { color: #c00; font-weight: bold; }
-.daily-goal { padding: 9px; }
-.goal-boxes { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; border: 1px solid #94aac7; padding: 2px; background: #fff; }
-.goal-boxes > span { height: 11px; background: #e8edf3; }
-.goal-boxes .done { background: var(--blue); }
-.daily-goal p { font-size: 12px; color: #666; margin-top: 5px; }
-.review-table th { font-size: 12px; padding: 5px; color: #555; background: #f3f5f8; font-weight: normal; }
-.review-table td { padding: 5px; border-top: 1px solid #d6e0ec; text-align: center; }
-.review-table td[lang] { font-size: 24px; }
-.review-panel > p, .help-panel > p { padding: 8px 9px; font-size: 12px; color: #555; }
-.review-panel > p + p { padding-top: 0; }
-.help-panel dl { margin: 0; padding: 8px 9px; font-size: 12px; }
-.help-panel dt { font-weight: bold; margin-top: 7px; color: #333; }
+.stats-table th, .stats-table td { border-bottom: 1px solid #5a7760; padding: 9px 0; text-align: left; font-weight: normal; }
+.stats-table th { font-size: 12px; color: #c9d3bc; }
+.stats-table td { text-align: right; font-size: 13px; }
+.stats-table .score { color: #f0ce8b; }
+.daily-goal { padding-top: 16px; }
+.goal-boxes { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
+.goal-boxes > span { height: 13px; background: #456855; border: 1px solid #9aab89; }
+.goal-boxes .done { background: #deca90; border-color: #deca90; }
+.daily-goal p { font-size: 12px; color: #c1ceb3; margin-top: 9px; }
+.review-panel, .help-panel { padding: 0 5px; }
+.review-table th { font-size: 12px; padding: 7px 3px; color: #848974; font-weight: normal; }
+.review-table td { padding: 7px 3px; border-bottom: 1px solid #d4d8c6; text-align: center; }
+.review-table td[lang] { font-size: 30px; color: #405c43; }
+.review-panel > p, .help-panel > p { padding-top: 12px; font-size: 12px; color: #7b826c; }
+.review-panel > p + p { padding-top: 6px; }
+.help-panel dl { margin: 0; padding-top: 12px; font-size: 12px; }
+.help-panel dt { margin-top: 10px; color: #596c51; }
 .help-panel dt:first-child { margin-top: 0; }
-.help-panel dd { margin: 3px 0 0; color: #666; }
-.help-panel > p { border-top: 1px dotted #bac9dc; }
+.help-panel dd { margin: 3px 0 0; color: #858772; }

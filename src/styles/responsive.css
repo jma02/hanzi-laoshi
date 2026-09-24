@@ -1,49 +1,88 @@
-@media (max-width: 900px) {
-  .portal { width: calc(100% - 16px); margin-top: 8px; }
-  .learning-layout { grid-template-columns: minmax(0, 1fr) 215px; gap: 8px; }
-  .masthead { padding: 18px 12px; }
-  .brand strong { font-size: 44px; }
-  .site-description > b { font-size: 16px; }
+@media (max-width: 1000px) {
+  .portal { width: calc(100% - 30px); padding-inline: 22px; margin-block: 15px; }
+  .learning-layout { grid-template-columns: minmax(0, 1fr) 225px; gap: 20px; }
+  .masthead { padding-block: 24px; }
+  .brand strong { font-size: 49px; }
   .audio-label { display: none; }
-  .character-tile { width: 68px; }
-  .hanzi { height: 64px; font-size: 41px; }
-  .practice-tabs > span { margin-left: 0; }
-}
-@media (max-width: 680px) {
-  .portal { width: calc(100% - 12px); margin-top: 6px; }
-  .utility-bar { font-size: 12px; padding: 5px; flex-wrap: wrap; gap: 4px; }
-  .masthead { padding: 15px 7px; gap: 8px; }
-  .brand strong { font-size: 36px; letter-spacing: 3px; }
-  .brand > span { font-size: 12px; letter-spacing: 2px; }
-  .site-description { font-size: 12px; }
-  .site-description > b { font-size: 14px; display: block; max-width: 145px; }
-  .site-description > p { display: none; }
-  .portal-nav button { font-size: 15px; padding: 7px 2px; }
-  .portal-nav button > span { display: block; font-size: 12px; margin: 4px 0 0; }
-  .announcement { font-size: 14px; padding: 6px; }
-  .announcement > span { display: block; margin-top: 3px; }
-  .location-bar { padding: 8px 2px; }
-  .learning-layout { grid-template-columns: minmax(0, 1fr); }
-  .companion-column { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .help-panel { grid-column: 1 / -1; }
-  .help-panel dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; }
-  .help-panel dt, .help-panel dd { margin: 0; }
-  .stats-table th, .stats-table td { padding: 6px 5px; font-size: 12px; }
-  .panel-title { gap: 4px; padding: 6px; }
-  .panel-title > span { font-size: 12px; }
-  .character-line { gap: 5px; padding-inline: 6px; }
-  .character-tile { width: 63px; }
-  .hanzi { height: 61px; font-size: 39px; }
-  .exercise-footer { gap: 8px; }
+  .practice-card { padding-inline: 18px; }
+  .character-tile { width: 69px; }
+  .hanzi { height: 69px; font-size: 46px; }
   .check-action > span { display: none; }
-  .result-message { flex-basis: 100%; }
+  .practice-tabs > span { margin-left: 0; }
+  .stats-panel { padding: 14px 12px; }
+  .stats-table th { max-width: 82px; }
+}
+@media (max-width: 760px) {
+  .portal { width: calc(100% - 20px); padding-inline: 17px; border-left-width: 4px; }
+  .learning-layout { grid-template-columns: minmax(0, 1fr); }
+  .companion-column { grid-template-columns: 1fr 1fr; gap: 22px; padding-top: 8px; align-items: start; }
+  .classroom-picture { grid-column: 1; grid-row: 1; }
+  .stats-panel { grid-column: 2; grid-row: 1 / 3; }
+  .review-panel { grid-column: 1; }
+  .help-panel { grid-column: 1 / -1; }
+  .help-panel dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; }
+  .help-panel dt, .help-panel dd { margin: 0; }
+  .nav-number { display: none; }
+  .portal-nav button { padding-block: 11px; }
+  .nav-copy b { font-size: 22px; letter-spacing: 0; }
+  .nav-copy small { font-size: 12px; }
+  .site-description > b { font-size: 20px; letter-spacing: 1px; }
+  .site-description p { max-width: 175px; font-size: 12px; }
+  .site-description > span { font-size: 12px; }
+  .character-tile { width: 76px; }
+  .hanzi { height: 76px; font-size: 51px; }
   .row-topic { display: none; }
-  .sentence-row { padding: 9px 7px; gap: 7px; }
-  .site-footer { padding-bottom: 12px; }
+}
+@media (max-width: 520px) {
+  .portal { width: calc(100% - 12px); margin: 6px auto 12px; padding-inline: 12px; }
+  .masthead { gap: 10px; padding-block: 21px; }
+  .brand strong { font-size: 40px; letter-spacing: 4px; }
+  .brand .brand-kicker { font-size: 14px; letter-spacing: 2px; }
+  .brand > span { font-size: 12px; letter-spacing: 3px; }
+  .site-description { max-width: 125px; }
+  .site-description > b { font-size: 19px; letter-spacing: 0; }
+  .site-description > p { font-size: 12px; line-height: 1.5; }
+  .site-description > span { display: none; }
+  .nav-copy b { font-size: 20px; }
+  .nav-copy small { font-size: 12px; }
+  .location-bar { padding-block: 13px; gap: 7px; }
+  .location-bar > span { display: none; }
+  .script-toggle { margin-left: auto; font-size: 12px; }
+  .script-toggle button { font-size: 12px; }
+  .practice-tabs { font-size: 12px; gap: 6px; }
+  .practice-tabs > span { margin-left: auto; font-size: 12px; }
+  .practice-card { padding-inline: 14px; }
+  .card-top { padding-top: 16px; }
+  .lesson-label h1 { font-size: 27px; }
+  .exercise-heading { font-size: 12px; }
+  .exercise-heading > span { font-size: 12px; }
+  .character-line { gap: 7px; padding-top: 23px; }
+  .character-tile { width: 65px; }
+  .hanzi { height: 65px; font-size: 44px; }
+  .punctuation { padding-top: 59px; font-size: 28px; }
+  .character-tile input { font-size: 16px; }
+  .translation p { font-size: 19px; }
+  .exercise-footer > .text-button { font-size: 12px; }
+  .primary { padding: 9px 14px; }
+  .result-message { flex-basis: 100%; }
+  .companion-column { gap: 15px; }
+  .stats-panel { padding: 12px 9px; }
+  .panel-title { font-size: 23px; gap: 4px; }
+  .panel-title > span { font-size: 12px; }
+  .stats-table th, .stats-table td { font-size: 12px; padding-block: 8px; }
+  .daily-goal p { font-size: 12px; line-height: 1.8; }
+  .review-panel > p, .help-panel > p { font-size: 12px; }
+  .review-table { font-size: 12px; }
+  .review-table .text-button { font-size: 12px; }
+  .collection-card { padding-inline: 13px; }
+  .collection-heading h1 { font-size: 25px; }
+  .site-footer { font-size: 12px; gap: 8px; }
 }
 @media (max-width: 360px) {
-  .brand strong { font-size: 31px; }
-  .site-description > b { max-width: 125px; font-size: 12px; }
-  .companion-column { grid-template-columns: 1fr; }
-  .character-tile { width: 60px; }
+  .portal-nav { grid-template-columns: repeat(2, 1fr); }
+  .site-description { display: none; }
+  .character-tile { width: 62px; }
+  .hanzi { height: 62px; }
+  .nav-copy b { font-size: 18px; }
+  .nav-copy small { font-size: 12px; }
 }

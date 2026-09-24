@@ -1,31 +1,29 @@
-.collection-card { border: 1px solid #8eaaca; }
-.collection-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; padding: 10px 12px; color: #143f7e; background: #edf3fb; border-bottom: 1px solid #a6bdd7; }
-.collection-heading h1 { font-size: 18px; }
-.collection-heading > span { font-size: 12px; }
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 10px; align-items: center; }
+.collection-card { border: 1px solid #a9b89e; background: #fffdf6; padding: 0 20px 16px; }
+.collection-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 19px 0 12px; border-bottom: 3px double #92a489; }
+.collection-heading h1 { font-size: 27px; color: var(--green); }
+.collection-heading > span { font-size: 12px; color: #7c806c; }
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; align-items: center; }
 .search { display: flex; align-items: center; gap: 8px; font-size: 14px; flex: 1; }
-.search input { min-width: 0; width: 100%; flex: 1; border: 1px solid #a9b6ca; padding: 7px; font-size: 16px; border-radius: 0; }
-.filters select { max-width: 100%; font-size: 14px; padding: 5px; border-radius: 0; }
-.result-count { font-size: 12px; padding: 0 10px 8px; color: #555; }
-.result-count b { color: #c00; }
+.search input { min-width: 0; width: 100%; flex: 1; border: 1px solid #b2bca5; padding: 8px; font-size: 16px; background: transparent; border-radius: 0; }
+.filters select { max-width: 100%; font-size: 14px; padding: 8px; border: 1px solid #b2bca5; background: transparent; border-radius: 0; }
+.result-count { font-size: 12px; padding-bottom: 12px; color: #80836e; }
+.result-count b { color: var(--red); }
 .table-scroll { overflow-x: auto; }
 .data-table { border-collapse: collapse; width: 100%; font-size: 14px; }
-.data-table th { background: #edf3fb; color: #234f8b; padding: 7px; font-size: 12px; white-space: nowrap; }
-.data-table td { border: 1px solid #c8d4e5; padding: 6px; text-align: center; }
-.data-table tr:nth-child(even) { background: #f6f8fb; }
-.data-table small { display: block; font-size: 12px; color: #666; margin-top: 3px; }
-.data-table .errors { color: #b00000; }
-.character-link { color: #0645ad; text-decoration: underline; font: 27px var(--song); background: none; border: 0; padding: 0 5px; }
-.character-link:hover { color: #c00; }
-.sentence-row { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px; border: 0; border-top: 1px dotted #bac8d9; background: #fff; text-align: left; }
-.sentence-row:nth-child(even) { background: #f4f7fb; }
-.sentence-row:hover { background: #fffee7; }
-.row-number { font: 12px var(--latin); color: #777; }
+.data-table th { color: #66795c; padding: 10px 6px; font-size: 12px; white-space: nowrap; font-weight: 400; background: #f0f2e6; }
+.data-table td { border-bottom: 1px solid #d0d6c1; padding: 8px 6px; text-align: center; }
+.data-table small { display: block; font-size: 12px; color: #7f8770; margin-top: 4px; }
+.data-table .errors { color: var(--red); }
+.character-link { color: var(--green); font: 35px var(--song); background: none; border: 0; padding: 0 5px; }
+.character-link:hover { color: var(--red); }
+.sentence-row { display: flex; align-items: center; gap: 14px; width: 100%; padding: 16px 0; border: 0; border-top: 1px solid #d0d6c1; background: transparent; text-align: left; }
+.sentence-row:hover { background: #f3f4e7; }
+.row-number { font: 12px var(--latin); color: #9a9c83; }
 .sentence-copy { flex: 1; }
-.sentence-copy strong { display: block; font-size: 21px; font-weight: normal; color: #0645ad; text-decoration: underline; }
-.sentence-copy > span { display: block; margin-top: 5px; font-size: 14px; color: #444; }
-.row-topic { font-size: 12px; color: #777; }
-.load-more { display: block; margin: 12px auto; }
-.empty-state { padding: 25px 15px; text-align: center; }
-.empty-state h2 { font-size: 18px; }
-.empty-state p { margin: 10px 0 15px; font-size: 14px; }
+.sentence-copy strong { display: block; font: 25px/1.5 var(--song); color: var(--green); }
+.sentence-copy > span { display: block; margin-top: 5px; font: 16px/1.6 Georgia, 'Times New Roman', serif; color: #6b735f; }
+.row-topic { font-size: 12px; color: #8b8e78; }
+.load-more { display: block; margin: 18px auto 0; }
+.empty-state { padding: 32px 15px; text-align: center; }
+.empty-state h2 { font-size: 25px; }
+.empty-state p { margin: 12px 0 18px; font-size: 14px; }

@@ -2,7 +2,9 @@
 
 A SvelteKit reading trainer for everyday Mandarin. Annotate individual characters, uncover their pinyin, and let the sentences adapt to the characters you miss.
 
-The interface follows an early Chinese education portal: a compact centered page, red Songti/SimSun masthead, cobalt navigation, square panels, and tabular learning records. Self-hosted IBM Plex Mono gives the English interface and pinyin a technical feel, paired with system Songti/SimSun for Chinese. Font files and their OFL license live in `static/fonts/`; no external font requests are needed. Layout, practice, stats, and collection styles live in separate small CSS files.
+The interface draws on a Chinese school exercise book: Kai-style Chinese type, pinyin ruling above character grids, green notebook headings, and red teacher markings. An original classroom illustration sits beside the lesson. IBM Plex Mono is used for pinyin and English controls; longer English translations use a system serif.
+
+Both web fonts are self-hosted under `static/fonts/` with their OFL licenses. `hanzi-classroom.woff` is a renamed web subset of [LXGW WenKai](https://github.com/lxgw/LxgwWenKai), covering the current sentence bank, its traditional forms, and interface text; unsupported characters fall back to system Kai/Song fonts. The original classroom illustration was generated for this project.
 
 ## Run
 
