@@ -36,3 +36,5 @@
 .empty-state p { margin-bottom: 20px; font-size: 14px; color: var(--muted); }
 .reading-status { font-size: 13px; color: var(--red); }
 .reading-status.mastered { color: var(--sage); }
+
+.mobile-cell-label { display: none; }

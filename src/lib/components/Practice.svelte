@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { tick } from 'svelte';
   import { tokens, type Sentence } from '$lib/corpus';
   import { toneMark, gradePinyin } from '$lib/pinyin';
   import { recordCharacter, dateKey, type Progress, type Settings } from '$lib/progress';
@@ -20,7 +19,15 @@
   let announcement = '';
   let composing = false;
   $: characters = tokens(sentence, settings.traditional);
+  $: characterGroups = characters.reduce((groups, token) => {
+    if (token.pinyin || !groups.length) groups.push([token]);
+    else groups[groups.length - 1].push(token);
+    return groups;
+  }, [] as (typeof characters)[]);
   $: answerCount = characters.filter(t => t.pinyin).length;
+  $: selectedNumber = characters.filter(t => t.pinyin && t.position <= selected).length;
+  $: previousEditable = characters.slice(0, selected).reverse().find(t => t.pinyin && !results[t.position]);
+  $: nextEditable = characters.find(t => t.position > selected && t.pinyin && !results[t.position]);
   $: filled = Object.values(values).filter(v => v.trim()).length;
   $: active = characters[selected];
   $: correct = Object.values(results).filter(r => r === 'correct').length;
@@ -36,9 +43,8 @@
     recordCharacter(progress, token.char, token.pinyin, 'missed'); progress = { ...progress };
   }
 
-  async function nextField(position: number) {
+  function nextField(position: number) {
     const next = characters.find(t => t.position > position && t.pinyin && !results[t.position]);
-    await tick();
     if (next) { selected = next.position; inputs[next.position]?.focus(); }
     else checkButton?.focus();
   }
@@ -80,11 +86,13 @@
 
   <form onsubmit={event => { event.preventDefault(); check(); }}>
     <div class="character-line" lang={settings.traditional ? 'zh-Hant' : 'zh-Hans'}>
-      {#each characters as token}
+      {#each characterGroups as group}
+        <div class="character-group">
+        {#each group as token}
         {#if token.pinyin}
           <div class:active={selected === token.position && !submitted} class="character-tile {results[token.position] || ''}">
             <button type="button" class="hanzi" tabindex={submitted ? 0 : -1} aria-label={`Select character ${token.display}`} onclick={() => { selected = token.position; inputs[token.position]?.focus(); }}>{token.display}</button>
-            <input bind:this={inputs[token.position]} bind:value={values[token.position]} aria-label={`Pinyin for ${token.display}, character ${token.position + 1}`} aria-describedby="pinyin-shortcuts" aria-keyshortcuts="?" placeholder="pinyin" autocomplete="off" autocapitalize="none" spellcheck={false} disabled={Boolean(results[token.position]) || submitted}
+            <input bind:this={inputs[token.position]} bind:value={values[token.position]} aria-label={`Pinyin for ${token.display}, character ${token.position + 1}`} aria-describedby="pinyin-entry-help" aria-keyshortcuts="?" placeholder="pinyin" inputmode="text" enterkeyhint={characters.some(t => t.position > token.position && t.pinyin && !results[t.position]) ? 'next' : 'done'} autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck={false} disabled={Boolean(results[token.position]) || submitted}
               onfocus={() => { selected = token.position; }} oninput={() => { incompleteWarning = false; announcement = ''; }} oncompositionstart={() => { composing = true; }}
               oncompositionend={() => { composing = false; }}
               onkeydown={event => {
@@ -110,9 +118,19 @@
             {:else}<button type="button" class="reveal" tabindex="-1" aria-label={`Reveal pinyin for ${token.display}`} title="Reveal pinyin (?)" onclick={() => { selected = token.position; reveal(token.position); }}>看答案</button>{/if}
           </div>
         {:else}<span class="punctuation">{token.display}</span>{/if}
+        {/each}
+        </div>
       {/each}
     </div>
     <p id="pinyin-shortcuts" class="small muted" lang="en"><kbd>Tab</kbd> next <span>·</span> <kbd>Shift + Tab</kbd> back <span>·</span> <kbd>?</kbd> reveal</p>
+    <p id="pinyin-entry-help" class="sr-only">Type one pinyin syllable per box, such as ni3 or nǐ. Tap a box to edit it. Use the previous and next controls or your keyboard to move between characters.</p>
+    {#if !submitted}
+      <div class="touch-input-tools" aria-label="Move between pinyin answers">
+        <button type="button" disabled={!previousEditable} aria-label="Previous editable character" onclick={() => { if (previousEditable) inputs[previousEditable.position]?.focus(); }}>上一字 <span lang="en">Back</span></button>
+        <span class="input-position" aria-live="polite">{selectedNumber} / {answerCount}</span>
+        <button type="button" aria-label={nextEditable ? 'Next editable character' : 'Finish entering pinyin'} onclick={() => nextField(selected)}>{nextEditable ? '下一字' : '完成'} <span lang="en">{nextEditable ? 'Next' : 'Done'}</span></button>
+      </div>
+    {/if}
     <span class="sr-only" aria-live="polite">{announcement}</span>
     <div class="translation">{#if showTranslation}<span class="meaning-label">释义 <small lang="en">Meaning</small></span><p lang="en">{sentence.english}</p>{:else}<button type="button" class="text-button" onclick={() => { showTranslation = true; }}><Icon name="eye" size={16}/> 看英文释义 <span lang="en">Show English</span></button>{/if}</div>
     <div class="exercise-footer">

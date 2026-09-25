@@ -14,6 +14,7 @@
 .speed-button[aria-pressed='true'] { color: var(--red); border-color: var(--rule); }
 .sentence-tools > .notice { flex: 1 1 100%; }
 .character-line { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 22px 0; padding: 25px 0 7px; }
+.character-group { display: flex; flex: 0 0 auto; align-items: flex-start; }
 .character-tile { display: flex; flex-direction: column; width: 80px; margin-right: -1px; position: relative; }
 .hanzi { order: 1; display: grid; place-items: center; width: 100%; height: 89px; padding: 0; border: 0; background: none; font: 56px/1 var(--song); color: var(--ink); }
 .character-tile input { order: 0; display: block; width: 100%; height: 43px; padding: 0 3px; border: 1px solid var(--rule); border-radius: 0; background-color: transparent; background-image: linear-gradient(to bottom, transparent 13px, #c4baaa50 13px, #c4baaa50 14px, transparent 14px, transparent 27px, #c4baaa50 27px, #c4baaa50 28px, transparent 28px); text-align: center; font: 21px var(--latin); color: var(--ink); }
@@ -62,3 +63,5 @@ kbd { font: inherit; color: var(--ink); }
 .input-help summary { color: var(--muted); cursor: pointer; font-size: 13px; }
 .input-help p { margin-top: 10px; }
 .input-help summary > span { font-size: 12px; margin-left: 6px; }
+
+.touch-input-tools { display: none; }

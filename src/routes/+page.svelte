@@ -25,7 +25,7 @@
     try { ({ progress, settings } = restoreProgress(localStorage.getItem(storageKey))); }
     catch { storageMessage = 'Saved progress could not be read. This session starts fresh.'; }
     hydrated = true;
-    if (progress.recent.length) startPractice();
+    if (progress.recent.length) startPractice(undefined, '', false);
     const lifecycle = new AbortController();
     const context = document.modelContext;
     if (context?.registerTool) {
@@ -45,8 +45,17 @@
     }
     return () => lifecycle.abort();
   });
-  function startPractice(pick?: Sentence, char = '') {
-    focus = char; sentence = pick || chooseSentence(sentences, progress, char); round++; view = 'practice';
+  async function scrollToTopOnPhone() {
+    await tick();
+    if (window.matchMedia('(max-width: 640px)').matches) window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+  function selectView(nextView: string) {
+    view = nextView; settingsOpen = false;
+    void scrollToTopOnPhone();
+  }
+  function startPractice(pick?: Sentence, char = '', scroll = true) {
+    focus = char; sentence = pick || chooseSentence(sentences, progress, char); round++; view = 'practice'; settingsOpen = false;
+    if (scroll) void scrollToTopOnPhone();
   }
 </script>
 
@@ -57,9 +66,9 @@
     <a class="brand" href="/" aria-label="汉字老师 Hanzi Laoshi home"><strong>汉字老师</strong><span lang="en">Hanzi Laoshi</span></a>
     <nav class="portal-nav" aria-label="Main navigation">
     {#each [{ id: 'practice', title: 'Practice', chinese: '练习' }, { id: 'characters', title: 'Characters', chinese: '字库' }, { id: 'sentences', title: 'Sentences', chinese: '例句' }] as item}
-      <button class:current={view === item.id} aria-current={view === item.id ? 'page' : undefined} onclick={() => { view = item.id; }}><span class="nav-copy"><b>{item.chinese}</b><small lang="en">{item.title}</small></span></button>
+      <button class:current={view === item.id} aria-current={view === item.id ? 'page' : undefined} onclick={() => selectView(item.id)}><span class="nav-copy"><b>{item.chinese}</b><small lang="en">{item.title}</small></span></button>
     {/each}
-    <button class:current={settingsOpen} aria-expanded={settingsOpen} onclick={() => { settingsOpen = !settingsOpen; }}><span class="nav-copy"><b>设置</b><small lang="en">Settings</small></span></button>
+    <button class:current={settingsOpen} aria-expanded={settingsOpen} onclick={() => { settingsOpen = !settingsOpen; void scrollToTopOnPhone(); }}><span class="nav-copy"><b>设置</b><small lang="en">Settings</small></span></button>
     </nav>
   </header>
   <main>

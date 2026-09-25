@@ -17,67 +17,124 @@
   .character-tile { width: 78px; }
   .hanzi { height: 89px; font-size: 56px; }
 }
-@media (max-width: 520px) {
-  .portal { width: calc(100% - 24px); }
-  .masthead { display: block; min-height: 0; padding-top: 20px; }
-  .brand { display: flex; gap: 10px; align-items: baseline; }
-  .brand strong { font-size: 28px; }
-  .brand > span { font-size: 14px; margin-top: 0; }
-  .portal-nav { justify-content: space-between; gap: 12px; margin-top: 20px; }
-  .portal-nav button { padding: 0 0 10px; }
-  .nav-copy b { font-size: 14px; }
-  .nav-copy small { font-size: 11px; margin-top: 3px; }
-  .page-tools { min-height: 40px; }
-  .worksheet, .collection-card { padding: 20px 17px 18px; }
-  .worksheet-header h1, .collection-heading h1 { font-size: 22px; }
-  .worksheet-header p, .collection-heading p { font-size: 13px; }
-  .sentence-tools { margin-top: 14px; gap: 5px 10px; }
-  .lesson-meta { font-size: 12px; gap: 8px; }
+/* A phone is a working notebook: full-width controls and space to tap. */
+@media (max-width: 640px) {
+  html { scroll-padding-block: 1rem; }
+  body { font-size: 1rem; }
+  .portal { width: 100%; padding: env(safe-area-inset-top, 0px) max(12px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(12px, env(safe-area-inset-left, 0px)); }
+  .masthead { display: block; min-height: 0; padding-top: 16px; }
+  .brand { display: flex; gap: 10px; align-items: baseline; padding-inline: 4px; }
+  .brand strong { font-size: 1.875rem; }
+  .brand > span { font-size: .9375rem; margin-top: 0; }
+  .portal-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 12px; }
+  .portal-nav button { min-height: 58px; padding: 8px 2px; }
+  .nav-copy { text-align: center; overflow-wrap: anywhere; }
+  .nav-copy b { font-size: 1rem; }
+  .nav-copy small { font-size: .75rem; margin-top: 4px; }
+  .page-tools { min-height: 48px; }
+  .script-toggle button { min-height: 44px; padding-inline: 8px; font-size: .875rem; }
+  .script-toggle button > span { font-size: .75rem; }
+  .worksheet, .collection-card { padding: 20px 16px; }
+  .worksheet-header h1, .collection-heading h1 { font-size: 1.375rem; }
+  .worksheet-header p, .collection-heading p { font-size: .875rem; }
+  .sentence-tools { margin-top: 10px; gap: 0 12px; }
+  .lesson-meta { font-size: .75rem; gap: 8px; }
   .lesson-meta > span + span { padding-left: 8px; }
   .lesson-meta small { display: none; }
-  .listen-button { font-size: 12px; }
-  .listen-button > [lang='en'] { font-size: 12px; }
-  .character-line { padding-top: 23px; }
-  .character-tile { width: 72px; }
-  .hanzi { height: 74px; font-size: 44px; }
-  .character-tile input { font-size: 18px; }
-  .character-tile input::placeholder { font-size: 12px; }
-  .punctuation { padding-top: 69px; font-size: 26px; margin-right: 0; }
-  .reveal { font-size: 13px; padding-block: 5px; }
-  #pinyin-shortcuts { font-size: 13px; }
-  #pinyin-shortcuts > span { margin-inline: 4px; }
-  .translation { margin-top: 22px; padding-top: 17px; }
-  .translation p { font-size: 16px; }
-  .exercise-footer { padding-block: 20px; gap: 10px; }
-  .exercise-footer > .text-button { font-size: 13px; }
-  .primary { padding: 9px 12px; font-size: 14px; }
-  .primary > [lang='en'], .text-button > [lang='en'] { font-size: 12px; margin-left: 3px; }
-  .result-message { flex-basis: 100%; }
-  .character-note { gap: 10px; }
-  .note-character { width: 40px; font-size: 37px; }
-  .character-note h3 { font-size: 14px; }
-  .companion-column { gap: 20px; }
-  .panel-title { gap: 5px; font-size: 14px; }
-  .panel-title > span { font-size: 11px; }
-  .stats-table th, .stats-table td { font-size: 12px; }
-  .today-progress p b { font-size: 32px; }
-  .goal-boxes { gap: 3px; }
+  .audio-tools { margin-left: auto; gap: 0; }
+  .listen-button { min-height: 44px; padding-inline: 4px; font-size: .875rem; }
+  .listen-button > [lang='en'] { font-size: .8125rem; }
+  .speed-button { min-width: 44px; min-height: 44px; font-size: 1rem; }
+  .character-line { gap: 14px 0; padding-top: 18px; }
+  .character-tile { width: 4.875rem; scroll-margin-block: 20px; }
+  .character-tile input { height: 3rem; font-size: 1.1875rem; scroll-margin-block: 20px; background-image: linear-gradient(to bottom, transparent 15px, #c4baaa50 15px, #c4baaa50 16px, transparent 16px, transparent 31px, #c4baaa50 31px, #c4baaa50 32px, transparent 32px); }
+  .character-tile input::placeholder { font-size: .8125rem; }
+  .hanzi { height: 4.25rem; font-size: 3rem; }
+  .punctuation { padding-top: 4.4375rem; font-size: 1.625rem; margin-right: 2px; }
+  .reveal { min-height: 44px; font-size: .875rem; padding: 6px 0; }
+  .answer-label { min-height: 44px; font-size: 1.0625rem; padding-block: 10px; }
+  #pinyin-shortcuts { display: none; }
+  .touch-input-tools { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; margin-top: 12px; }
+  .touch-input-tools button { min-height: 44px; padding: 8px 4px; font-size: .875rem; border-color: var(--rule); }
+  .touch-input-tools button > span { margin-left: 3px; font-size: .8125rem; color: var(--muted); }
+  .touch-input-tools button:disabled { opacity: .4; }
+  .input-position { font-size: .8125rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .translation { margin-top: 22px; padding-top: 18px; }
+  .translation p { font-size: 1rem; }
+  .translation .text-button { min-height: 44px; flex-wrap: wrap; font-size: .875rem; }
+  .exercise-footer { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 16px 20px; }
+  .exercise-footer > .text-button { order: 2; min-height: 44px; justify-self: center; font-size: .875rem; }
+  .exercise-footer .check-action, .exercise-footer .check-action.incomplete { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: stretch; gap: 8px; }
+  .check-action > span { display: block; font-size: .8125rem; }
+  .primary, .secondary { min-height: 48px; font-size: 1rem; padding: 10px 14px; }
+  .primary > [lang='en'], .secondary > [lang='en'], .text-button > [lang='en'] { font-size: .875rem; }
+  .exercise-footer > .primary { width: 100%; }
+  #incomplete-note { font-size: .875rem; text-align: left; }
+  .result-message { align-items: flex-start; font-size: 1rem; margin-bottom: 6px; }
+  .result-message div > span { font-size: .875rem; }
+  .character-note { gap: 12px; }
+  .note-character { width: 40px; font-size: 2.5rem; }
+  .character-note h3 { font-size: 1rem; overflow-wrap: anywhere; }
+  .input-help { font-size: 1rem; }
+  .input-help summary { min-height: 44px; padding-block: 10px; font-size: .875rem; }
+  .input-help summary > span { font-size: .8125rem; }
+  .practice-bottom { padding-block: 4px; }
+  .practice-bottom .text-button, .practice-tabs .text-button { min-height: 44px; padding-inline: 8px; font-size: .875rem; }
+  .companion-column { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 0 4px; }
+  .panel-title { gap: 8px; font-size: 1rem; }
+  .panel-title > span { font-size: .8125rem; }
+  .stats-table th, .stats-table td { font-size: .875rem; }
+  .stats-table th small { display: inline; margin-left: 8px; font-size: .75rem; }
+  .today-progress > div > span { font-size: .875rem; }
+  .today-progress small, .today-progress p span { font-size: .8125rem; }
+  .today-progress p b { font-size: 2.25rem; }
+  .goal-boxes { gap: 4px; }
+  .review-panel > p, .review-panel .supporting { font-size: .875rem; }
+  .review-table { font-size: 1rem; }
+  .review-table th { font-size: .875rem; }
+  .review-table .text-button { min-width: 44px; min-height: 44px; font-size: .875rem; }
   .settings-panel { padding: 18px; }
   .settings-panel .section-label { align-items: flex-start; }
-  .settings-panel .section-label > button { flex-shrink: 0; }
-  .filters { gap: 10px; }
-  .search { flex-basis: 100%; }
-  .search input { font-size: 16px; }
-  .filters select { width: 100%; font-size: 16px; }
-  .sentence-copy strong { font-size: 24px; }
-  .sentence-row { padding-block: 15px; }
+  .settings-panel .section-label > button { flex-shrink: 0; min-width: 44px; min-height: 44px; }
+  .settings-panel label { min-height: 44px; }
+  .settings-panel input { width: 20px; height: 20px; }
+  .settings-panel .supporting, .settings-panel .small { font-size: .875rem; }
+  .filters { gap: 12px; }
+  .search { flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 8px; min-width: 0; }
+  .search > span { font-size: .875rem; }
+  .search > span small { display: inline; margin-left: 8px; font-size: .8125rem; }
+  .search input, .filters select { width: 100%; min-height: 48px; font-size: 1rem; }
+  .sentence-copy strong { font-size: 1.625rem; overflow-wrap: anywhere; }
+  .sentence-copy > span { font-size: 1rem; }
+  .sentence-row { padding-block: 16px; }
+  .result-count { font-size: .8125rem; }
   .result-count > span { display: block; margin-left: 0; }
-  .site-footer { margin-top: 22px; font-size: 11px; }
+  .empty-state p { font-size: 1rem; }
+  .empty-state .primary, .load-more { width: 100%; }
+  .table-scroll { overflow: visible; }
+  .data-table, .data-table tbody { display: block; }
+  .data-table thead { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .data-table tbody tr { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) minmax(0, 1.35fr); grid-template-areas: 'character pinyin status' 'character correct missed'; gap: 6px 10px; align-items: center; padding-block: 14px; border-top: 1px solid var(--line); }
+  .data-table td { display: block; min-width: 0; padding: 0; border: 0; text-align: left; font-size: .875rem; }
+  .data-table .bank-character { grid-area: character; }
+  .data-table .bank-pinyin { grid-area: pinyin; font: 1.25rem var(--latin); overflow-wrap: anywhere; }
+  .data-table .bank-status { grid-area: status; overflow-wrap: anywhere; }
+  .data-table .bank-correct { grid-area: correct; }
+  .data-table .bank-missed { grid-area: missed; }
+  .data-table small { font-size: .75rem; margin-top: 2px; }
+  .mobile-cell-label { display: block; font-size: .75rem; color: var(--muted); }
+  .reading-status { font-size: .875rem; }
+  .character-link { min-width: 48px; min-height: 56px; font-size: 2.5rem; padding-inline: 0; }
+  .site-footer { margin-top: 24px; font-size: .75rem; }
 }
-@media (max-width: 360px) {
-  .worksheet, .collection-card { padding-inline: 13px; }
-  .character-tile { width: 70px; }
-  .hanzi { font-size: 39px; }
-  .companion-column { grid-template-columns: 1fr; }
-  .check-action .primary { padding-inline: 9px; }
+/* Touch tablets keep the same input controls even in landscape. */
+@media (pointer: coarse) and (min-width: 641px) {
+  #pinyin-shortcuts { display: none; }
+  .touch-input-tools { display: flex; align-items: center; gap: 16px; margin-top: 12px; }
+  .touch-input-tools button, .listen-button, .speed-button, .reveal, .script-toggle button { min-height: 44px; }
+  .touch-input-tools button { font-size: 14px; }
+  .touch-input-tools button > span { margin-left: 4px; font-size: 13px; }
+  .touch-input-tools button:disabled { opacity: .4; }
+  .input-position { font-size: 13px; color: var(--muted); }
+  .character-tile input { height: 48px; }
 }
