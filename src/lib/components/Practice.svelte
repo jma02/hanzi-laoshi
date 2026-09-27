@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { tokens, type Sentence } from '$lib/corpus';
+  import { tokens, type PracticeSentence } from '$lib/sentence';
   import { toneMark, gradePinyin } from '$lib/pinyin';
   import { recordCharacter, dateKey, type Progress, type Settings } from '$lib/progress';
   import glosses from '$lib/data/glosses.json';
@@ -7,7 +7,7 @@
   import AudioPlayer from './AudioPlayer.svelte';
   import CozySprite from './CozySprite.svelte';
   import { topicName } from '$lib/labels';
-  export let sentence: Sentence;
+  export let sentence: PracticeSentence;
   export let progress: Progress;
   export let settings: Settings;
   export let onnext: () => void;

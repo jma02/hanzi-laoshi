@@ -8,11 +8,17 @@
   import Practice from '$lib/components/Practice.svelte';
   import Collection from '$lib/components/Collection.svelte';
   import Companion from '$lib/components/Companion.svelte';
-  import { sentences, totalCharacters, type Sentence } from '$lib/corpus';
+  import type { Sentence } from '$lib/sentence';
+  import type { PageData } from './$types';
   import { freshProgress, defaultSettings, storageKey, restoreProgress, chooseSentence, dateKey } from '$lib/progress';
+  export let data: PageData;
   let progress = structuredClone(freshProgress), settings = { ...defaultSettings };
   let hydrated = false, storageMessage = '', view = 'practice', settingsOpen = false;
-  let sentence = sentences.find(s => s.hanzi === '我想喝一杯茶。') || sentences[40];
+  let sentence = data.initialSentence;
+  let corpus: typeof import('$lib/corpus') | undefined;
+  let corpusPromise: Promise<typeof import('$lib/corpus')> | undefined;
+  let corpusLoading = false, corpusError = '', actionId = 0;
+  let retryCorpus: (() => Promise<boolean>) | undefined;
   let round = 0, focus = '';
   $: level = Math.floor(progress.xp / 150) + 1;
   $: mastered = Object.values(progress.characters).filter(s => s.run >= 3).length;
@@ -25,7 +31,7 @@
     try { ({ progress, settings } = restoreProgress(localStorage.getItem(storageKey))); }
     catch { storageMessage = 'Saved progress could not be read. This session starts fresh.'; }
     hydrated = true;
-    if (progress.recent.length) startPractice(undefined, '', false);
+    if (progress.recent.length) void startPractice(undefined, '', false);
     const lifecycle = new AbortController();
     const context = document.modelContext;
     if (context?.registerTool) {
@@ -34,27 +40,59 @@
         { name: 'start_sentence_practice', description: 'Start a sentence by its corpus ID, or choose adaptive practice. Does not submit answers.', inputSchema: { type: 'object', properties: { sentenceId: { type: 'string' } }, additionalProperties: false }, annotations: { readOnlyHint: false }, execute: async (input: unknown) => {
           if (!input || typeof input !== 'object' || Object.keys(input).some(key => key !== 'sentenceId')) throw new Error('Expected an optional sentenceId.');
           const id = (input as { sentenceId?: unknown }).sentenceId;
-          const chosen = id === undefined ? undefined : sentences.find(s => s.id === id);
-          if (id !== undefined && !chosen) throw new Error('Unknown sentence ID.');
-          startPractice(chosen); await tick(); return { id: sentence.id, hanzi: sentence.hanzi, status: 'ready' };
+          if (id !== undefined && typeof id !== 'string') throw new Error('Expected a string sentenceId.');
+          const ready = await withCorpus(loaded => {
+            const chosen = id === undefined ? undefined : loaded.sentences.find(s => s.id === id);
+            if (id !== undefined && !chosen) throw new Error('Unknown sentence ID.');
+            applyPractice(loaded, chosen);
+          });
+          if (!ready) throw new Error(corpusError || 'Practice request was superseded.');
+          await tick(); return { id: sentence.id, hanzi: sentence.hanzi, status: 'ready' };
         } }
       ];
       for (const tool of tools) {
         try { void Promise.resolve(context.registerTool(tool, { signal: lifecycle.signal })).catch(() => {}); } catch { /* Optional browser capability. */ }
       }
     }
-    return () => lifecycle.abort();
+    return () => { actionId++; lifecycle.abort(); };
   });
+  async function withCorpus(action: (loaded: typeof import('$lib/corpus')) => void): Promise<boolean> {
+    const request = ++actionId;
+    corpusLoading = !corpus; corpusError = ''; retryCorpus = undefined;
+    let loaded: typeof import('$lib/corpus');
+    try {
+      // Deduplicate concurrent requests; permit retry after a failed download.
+      corpusPromise ??= import('$lib/corpus').catch(error => { corpusPromise = undefined; throw error; });
+      loaded = await corpusPromise;
+      corpus = loaded;
+    } catch {
+      if (request === actionId) {
+        corpusError = 'The sentence bank could not be loaded. Check your connection and try again.';
+        retryCorpus = () => withCorpus(action);
+      }
+      return false;
+    } finally {
+      if (request === actionId) corpusLoading = false;
+    }
+    if (request !== actionId) return false;
+    action(loaded);
+    return true;
+  }
   async function scrollToTopOnPhone() {
     await tick();
     if (window.matchMedia('(max-width: 640px)').matches) window.scrollTo({ top: 0, behavior: 'instant' });
   }
   function selectView(nextView: string) {
+    actionId++; corpusLoading = false; corpusError = ''; retryCorpus = undefined;
     view = nextView; settingsOpen = false;
+    if (view !== 'practice') void withCorpus(() => {});
     void scrollToTopOnPhone();
   }
   function startPractice(pick?: Sentence, char = '', scroll = true) {
-    focus = char; sentence = pick || chooseSentence(sentences, progress, char); round++; view = 'practice'; settingsOpen = false;
+    return withCorpus(loaded => applyPractice(loaded, pick, char, scroll));
+  }
+  function applyPractice(loaded: typeof import('$lib/corpus'), pick?: Sentence, char = '', scroll = true) {
+    focus = char; sentence = loaded.prepareSentence(pick || chooseSentence(loaded.sentences, progress, char)); round++; view = 'practice'; settingsOpen = false;
     if (scroll) void scrollToTopOnPhone();
   }
 </script>
@@ -74,6 +112,8 @@
   <main>
     <div class="page-tools"><div class="script-toggle" aria-label="Character script"><button class:selected={!settings.traditional} aria-pressed={!settings.traditional} aria-label="Simplified Chinese" onclick={() => { settings.traditional = false; }}>简体 <span lang="en">Simplified</span></button><span aria-hidden="true">/</span><button class:selected={settings.traditional} aria-pressed={settings.traditional} aria-label="Traditional Chinese" onclick={() => { settings.traditional = true; }}>繁體 <span lang="en">Traditional</span></button></div></div>
     {#if storageMessage}<p class="notice" role="status" lang="en">{storageMessage}</p>{/if}
+    {#if corpusLoading}<p class="notice" role="status" lang="en">Loading the sentence bank…</p>{/if}
+    {#if corpusError}<p class="notice" role="alert" lang="en">{corpusError} <button class="text-button" onclick={() => { void retryCorpus?.(); }}>Try again</button></p>{/if}
     {#if settingsOpen}
       <section class="settings-panel">
         <div class="section-label"><h2>练习设置 <small lang="en">Settings</small></h2><button class="text-button" aria-label="Close settings" onclick={() => { settingsOpen = false; }}>关闭 ×</button></div>
@@ -88,10 +128,10 @@
           {#if focus}<div class="practice-tabs"><strong>重点复习：{focus}</strong><button class="text-button" onclick={() => startPractice()}>取消 <span lang="en">Clear focus</span></button></div>{/if}
           {#key round}<Practice {sentence} bind:progress {settings} onnext={() => startPractice(undefined, focus)}/>{/key}
           <div class="practice-bottom"><button class="text-button" onclick={() => startPractice(undefined, focus)}>换一句 <span lang="en">Skip</span></button></div>
-        {:else}<Collection {view} {progress} useTraditional={settings.traditional} onpractice={startPractice}/>{/if}
+        {:else if corpus}<Collection {corpus} {view} {progress} useTraditional={settings.traditional} onpractice={startPractice}/>{/if}
       </div>
       <Companion {progress} {level} {streak} {mastered} onfocus={char => startPractice(undefined, char)}/>
     </div>
-    <footer class="site-footer"><span>{sentences.length} 个日常例句 · {totalCharacters} 个汉字</span><span>{storageMessage ? '进度未保存' : '进度已保存在本机'}</span></footer>
+    <footer class="site-footer"><span>{data.sentenceCount} 个日常例句 · {data.totalCharacters} 个汉字</span><span>{storageMessage ? '进度未保存' : '进度已保存在本机'}</span></footer>
   </main>
 </div>

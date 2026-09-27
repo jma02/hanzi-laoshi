@@ -3,8 +3,27 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { gradePinyin, toneMark } from '../src/lib/pinyin.ts';
 import { chooseSentence, freshProgress, recordCharacter, restoreProgress } from '../src/lib/progress.ts';
+import { tokens } from '../src/lib/sentence.ts';
+import * as OpenCC from 'opencc-js/cn2t';
 
 const corpus = ['daily', 'world'].flatMap(name => JSON.parse(readFileSync(new URL(`../src/lib/data/${name}.json`, import.meta.url), 'utf8')));
+
+test('prepared sentences preserve contextual Traditional display and recognition in both scripts', () => {
+  const traditional = OpenCC.Converter({ from: 'cn', to: 'tw' });
+  for (const sentence of corpus) {
+    const traditionalHanzi = traditional(sentence.hanzi);
+    // A serialized server sentence must behave just like a client-prepared one.
+    const prepared = JSON.parse(JSON.stringify({ ...sentence, traditionalHanzi }));
+    for (const useTraditional of [false, true]) {
+      const result = tokens(prepared, useTraditional);
+      assert.equal(result.map(t => t.display).join(''), useTraditional ? traditionalHanzi : sentence.hanzi);
+      assert.equal(result.map(t => t.traditional).join(''), traditionalHanzi);
+      assert.equal(result.map(t => t.char).join(''), sentence.hanzi);
+      assert.deepEqual(result.filter(t => t.pinyin).map(t => t.pinyin), sentence.pinyin);
+      assert.deepEqual(result.map(t => t.position), [...sentence.hanzi].map((_, i) => i));
+    }
+  }
+});
 
 test('accepts tone marks, numbers, neutral tones, and keyboard alternatives', () => {
   for (const input of ['nǐ', 'ni3', 'NI3', ' ni3 ']) assert.ok(gradePinyin(input, 'ni3', true));

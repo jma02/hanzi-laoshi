@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { sentences, categories, traditional, type Sentence } from '$lib/corpus';
+  import type { Sentence } from '$lib/sentence';
   import { toneMark } from '$lib/pinyin';
   import type { Progress } from '$lib/progress';
   import { topicName } from '$lib/labels';
   export let view: string;
+  export let corpus: typeof import('$lib/corpus');
+  $: ({ sentences, categories, traditional } = corpus);
   export let progress: Progress;
   export let useTraditional: boolean;
   export let onpractice: (sentence?: Sentence, focus?: string) => void;

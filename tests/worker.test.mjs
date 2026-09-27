@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 test('built Sites worker serves pages, APIs, and assets without the default cache', async () => {
   const originalCache = Object.getOwnPropertyDescriptor(globalThis, 'caches');
@@ -20,6 +21,17 @@ test('built Sites worker serves pages, APIs, and assets without the default cach
     const html = await page.text();
     assert.match(html, /Hanzi Laoshi/);
     assert.match(html, /Pinyin for/);
+    assert.match(html, /440 个日常例句/);
+    assert.match(html, /traditionalHanzi/);
+    const manifest = JSON.parse(readFileSync(new URL('../.svelte-kit/output/client/.vite/manifest.json', import.meta.url), 'utf8'));
+    assert.ok(!html.includes(manifest['src/lib/corpus.ts'].file), 'SSR must not preload the deferred corpus');
+
+    const data = await worker.fetch(new Request('https://hanzi.test/__data.json'), env, ctx);
+    assert.equal(data.status, 200);
+    const serialized = await data.text();
+    assert.match(serialized, /我想喝一杯茶。/);
+    assert.match(serialized, /sentenceCount/);
+    assert.ok(serialized.length < 2000, 'Hydration data must contain only the starter and counts');
 
     const status = await worker.fetch(new Request('https://hanzi.test/api/tts'), env, ctx);
     assert.equal(status.status, 200);

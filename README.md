@@ -22,10 +22,18 @@ npm run dev
 npm run check
 npm test
 npm run build
-node --test tests/worker.test.mjs
+node --test tests/*.test.mjs
 ```
 
 Svelte 5, SvelteKit, TypeScript, and the Cloudflare adapter. No application database or account system. Progress and preferences use `localStorage` under `hanzi-laoshi:v1`; they stay in one browser and origin. Clearing browser data clears progress.
+
+## Client loading
+
+The server renders the starter worksheet and sends only that sentence, its contextual Traditional form, and corpus counts in page data. `sentence.ts` handles display and recognition grading without importing the corpus or OpenCC. Both scripts work immediately, including Traditional character answers while practicing in Simplified mode.
+
+The browser imports `corpus.ts` on the first request for another sentence, a focused review, or either collection view. Learners with recent saved practice also load it after hydration to restore adaptive selection. Requests share one download, show loading/retry feedback, and ignore superseded navigation. Search still uses the complete corpus and OpenCC conversion in both scripts; progress keys and audio IDs are unchanged.
+
+Measured against main `8283c9e` with the same lockfile and production build, initial JavaScript falls from 1,304,580 to 129,815 bytes (541,439 to 54,899 bytes gzip, summed per file). This includes the SvelteKit entries, layout/error/page nodes loaded at startup, and their static dependencies. SSR HTML adds about 311 bytes (157 bytes gzip). The 1,183 KB corpus/OpenCC chunk is deferred, not removed: returning learners and subsequent practice still download it, and Vite still reports its size warning. `tests/payload.test.mjs` checks the initial dependency graph and a 200 KB uncompressed budget after a build.
 
 ## Learning behavior
 
@@ -59,7 +67,9 @@ The published Site starts private. Before offering public access to a paid TTS e
 
 - `src/lib/pinyin.ts` — input normalization and tone display
 - `src/lib/progress.ts` — progress schema and adaptive selection
-- `src/lib/corpus.ts` — sentence and script handling
+- `src/lib/corpus.ts` — full sentence bank and OpenCC conversion, loaded on demand in the browser
+- `src/lib/sentence.ts` — lightweight sentence types and token handling
+- `src/routes/+page.server.ts` — starter worksheet and corpus counts for SSR/hydration
 - `src/lib/components/` — practice, collection, companion, audio
 - `src/routes/api/tts/` — server-only Cartesia integration
 - `tests/learning.test.ts` — grading, corpus integrity, review behavior, persistence
